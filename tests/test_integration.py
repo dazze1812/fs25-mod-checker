@@ -42,12 +42,6 @@ def _project_version() -> str:
     return pyproject_data["project"]["version"]
 
 
-@pytest.fixture
-def require_fixtures():
-    if not REAL_XML.exists() or not REAL_I3D.exists():
-        pytest.skip("Fixture files not present")
-
-
 # ---------------------------------------------------------------------------
 # Version flag (does not need fixture files)
 # ---------------------------------------------------------------------------
@@ -70,8 +64,9 @@ class TestVersionFlag:
 
 class TestCLIHappyPath:
     @pytest.fixture(autouse=True)
-    def _require_fixtures(self, require_fixtures):  # noqa: PT004
-        pass
+    def require_fixtures(self):
+        if not REAL_XML.exists() or not REAL_I3D.exists():
+            pytest.skip("Fixture files not present")
 
     def test_exit_code_1_when_problems_found(self):
         result = _run(str(REAL_XML))
