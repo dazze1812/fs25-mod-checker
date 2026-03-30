@@ -40,7 +40,7 @@ jobs:
               run: uv sync --dev --frozen
 
             - name: Run Bandit
-              run: uv run --with bandit bandit -r src/fs25_mod_checker -f sarif -o bandit.sarif
+              run: uv run --with bandit --with bandit-sarif-formatter bandit -r src/fs25_mod_checker -f sarif -o bandit.sarif
 
             - name: Upload Bandit results
               if: always()
