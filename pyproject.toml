@@ -5,7 +5,9 @@ description = "FS25 Mod Checker"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "defusedxml>=0.7.1",
+]
 
 [project.scripts]
 fs25-mod-checker = "fs25_mod_checker:main"
