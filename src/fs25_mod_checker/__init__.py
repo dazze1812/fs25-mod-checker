@@ -1,10 +1,36 @@
 import json
-import sys
 import shutil
+import sys
+import tomllib
 import zipfile
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as package_version
 from pathlib import Path
 
-from fs25_mod_checker.checker import deduplicate_problems, run_checks
+from .checker import run_checks
+
+PACKAGE_NAME = "fs25-mod-checker"
+
+
+def _read_pyproject_version() -> str:
+    """Read the project version from pyproject.toml for source-tree execution."""
+    pyproject_path = Path(__file__).resolve().parents[2] / "pyproject.toml"
+    pyproject_data = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
+    return pyproject_data["project"]["version"]
+
+
+def get_version() -> str:
+    """Return the project version from local pyproject.toml or package metadata."""
+    try:
+        return _read_pyproject_version()
+    except (FileNotFoundError, KeyError, tomllib.TOMLDecodeError):
+        try:
+            return package_version(PACKAGE_NAME)
+        except PackageNotFoundError:
+            raise RuntimeError("Unable to determine project version.") from None
+
+
+__version__ = get_version()
 
 
 def _create_mod_zip(workspace: Path, output_zip: Path | None = None) -> Path:
@@ -49,10 +75,7 @@ def _create_mod_zip(workspace: Path, output_zip: Path | None = None) -> Path:
 
 
 def _resolve_checker_command() -> tuple[str, list[str]]:
-    """Resolve the fs25-mod-checker command for use in VS Code tasks.
-    
-    Returns: (command, args) tuple where command is the executable and args are additional arguments
-    """
+    """Resolve the checker command for VS Code tasks."""
     # If running as compiled executable (PyInstaller), return the exe path
     if getattr(sys, 'frozen', False):
         return (str(Path(sys.executable).resolve()), [])
@@ -176,7 +199,7 @@ def _init_workspace() -> None:
     tasks_file.write_text(json.dumps(tasks_data, indent=2), encoding="utf-8")
     
     print(f"[OK] Initialized VS Code workspace in {cwd}")
-    print(f"[OK] Created/updated .vscode/tasks.json")
+    print("[OK] Created/updated .vscode/tasks.json")
     print()
     print("Next steps:")
     print("1. Edit .vscode/tasks.json and add the XML file path to the 'Check Mod' task args")
@@ -214,6 +237,11 @@ def main() -> None:
         help="Create a ZIP package of the current workspace"
     )
     parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}"
+    )
+    parser.add_argument(
         "--output",
         dest="output_zip",
         help="Optional output ZIP path used with --package"
@@ -226,7 +254,8 @@ def main() -> None:
         return
 
     if args.package:
-        zip_path = _create_mod_zip(Path.cwd(), Path(args.output_zip) if args.output_zip else None)
+        output_zip = Path(args.output_zip) if args.output_zip else None
+        zip_path = _create_mod_zip(Path.cwd(), output_zip)
         print(f"[OK] Created {zip_path}")
         return
     

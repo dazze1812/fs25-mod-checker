@@ -5,11 +5,13 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 import pytest
 
 FIXTURES = Path(__file__).parent / "fixtures"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REAL_XML = FIXTURES / "VolvoEWR150E.xml"
 REAL_I3D = FIXTURES / "VolvoEWR150E.i3d"
 
@@ -32,6 +34,12 @@ def _run(*args: str, cwd: Path | None = None) -> subprocess.CompletedProcess:
         text=True,
         cwd=cwd,
     )
+
+
+def _project_version() -> str:
+    pyproject_text = (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    pyproject_data = tomllib.loads(pyproject_text)
+    return pyproject_data["project"]["version"]
 
 
 @pytest.fixture(autouse=True)
@@ -70,6 +78,16 @@ class TestCLIHappyPath:
             "--i3d", str(REAL_I3D),
         )
         assert result.returncode in (0, 1)  # either is valid
+
+    def test_version_flag_prints_project_version(self):
+        result = _run("--version")
+        assert result.returncode == 0
+        assert result.stdout.strip() == f"fs25-mod-checker {_project_version()}"
+
+    def test_version_flag_does_not_require_fixture_files(self):
+        result = _run("--version", cwd=PROJECT_ROOT)
+        assert result.returncode == 0
+        assert result.stderr == ""
 
 
 # ---------------------------------------------------------------------------
