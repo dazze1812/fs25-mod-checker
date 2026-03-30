@@ -20,14 +20,19 @@ def _read_pyproject_version() -> str:
 
 
 def get_version() -> str:
-    """Return the project version from local pyproject.toml or package metadata."""
+    """Return the project version from local pyproject.toml or package metadata.
+
+    Falls back to a safe default if neither is available, to avoid import-time
+    failures in environments where metadata files are not bundled (e.g. PyInstaller).
+    """
     try:
         return _read_pyproject_version()
     except (FileNotFoundError, KeyError, tomllib.TOMLDecodeError):
         try:
             return package_version(PACKAGE_NAME)
         except PackageNotFoundError:
-            raise RuntimeError("Unable to determine project version.") from None
+            # As a last resort, return a safe default instead of raising at import time.
+            return "0.0.0"
 
 
 __version__ = get_version()

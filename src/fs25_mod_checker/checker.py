@@ -58,9 +58,11 @@ def _build_node_map(element: Any, current_path: str, node_map: dict[str, I3dNode
 
 
 def load_i3d_nodes(i3d_path: Path) -> dict[str, I3dNode]:
-    root = ET.parse(i3d_path).getroot()
-    if root is None:
-        raise ValueError(f"No root element found in {i3d_path}")
+    try:
+        tree = ET.parse(i3d_path)
+    except (ET.ParseError, OSError) as exc:
+        raise ValueError(f"Failed to parse I3D file {i3d_path}: {exc}") from exc
+    root = tree.getroot()
     scene = root.find("Scene")
     if scene is None:
         raise ValueError(f"No <Scene> element found in {i3d_path}")
