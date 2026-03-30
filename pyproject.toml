@@ -1,0 +1,44 @@
+[project]
+name = "fs25-mod-checker"
+version = "0.1.0"
+description = "FS25 Mod Checker"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+fs25-mod-checker = "fs25_mod_checker:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.15.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fs25_mod_checker"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/fs25_mod_checker",
+    "scripts/build.cmd",
+    "README.md",
+    "LICENSE",
+    ".python-version",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=fs25_mod_checker --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/fs25_mod_checker"]
+
+[tool.coverage.report]
+show_missing = true
