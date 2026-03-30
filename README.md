@@ -85,6 +85,12 @@ Optional output path:
 fs25-mod-checker --package --output .\releases\MyMod.zip
 ```
 
+### Show the checker version
+
+```cmd
+fs25-mod-checker --version
+```
+
 ## Rule IDs
 
 | Code | Description |
@@ -104,6 +110,12 @@ Run tests:
 
 ```cmd
 uv run pytest --cov
+```
+
+Run type checking:
+
+```cmd
+uv run pyright
 ```
 
 Run checker on fixture:
@@ -127,8 +139,9 @@ uv build
 ## GitHub Upload Checklist
 
 1. Ensure tests pass locally.
-2. Commit all changes.
-3. Push to GitHub.
+2. Ensure any release tag matches the version in [pyproject.toml](pyproject.toml).
+3. Commit all changes.
+4. Push to GitHub.
 
 Example:
 

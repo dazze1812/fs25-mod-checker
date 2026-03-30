@@ -6,6 +6,7 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from defusedxml import ElementTree as ET
 
@@ -49,7 +50,7 @@ def _normalize_node_path(path: str) -> str:
     return path
 
 
-def _build_node_map(element: ET.Element, current_path: str, node_map: dict[str, I3dNode]) -> None:
+def _build_node_map(element: Any, current_path: str, node_map: dict[str, I3dNode]) -> None:
     for i, child in enumerate(element):
         child_path = str(i) if not current_path else f"{current_path}|{i}"
         node_map[child_path] = I3dNode(path=child_path, name=child.get("name", ""))
@@ -57,7 +58,13 @@ def _build_node_map(element: ET.Element, current_path: str, node_map: dict[str, 
 
 
 def load_i3d_nodes(i3d_path: Path) -> dict[str, I3dNode]:
-    root = ET.parse(i3d_path).getroot()
+    try:
+        tree = ET.parse(i3d_path)
+    except (ET.ParseError, OSError) as exc:
+        raise ValueError(f"Failed to parse I3D file {i3d_path}: {exc}") from exc
+    root = tree.getroot()
+    if root is None:
+        raise ValueError(f"No root element found in {i3d_path}")
     scene = root.find("Scene")
     if scene is None:
         raise ValueError(f"No <Scene> element found in {i3d_path}")
