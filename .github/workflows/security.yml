@@ -71,7 +71,7 @@ jobs:
 
     dependency-review:
         name: Dependency Review
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.event.repository.visibility == 'public'
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -83,4 +83,3 @@ jobs:
 
             - name: Review dependency changes
               uses: actions/dependency-review-action@v4
-              continue-on-error: true # requires GitHub Advanced Security on private repos

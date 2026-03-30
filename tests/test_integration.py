@@ -42,10 +42,26 @@ def _project_version() -> str:
     return pyproject_data["project"]["version"]
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def require_fixtures():
     if not REAL_XML.exists() or not REAL_I3D.exists():
         pytest.skip("Fixture files not present")
+
+
+# ---------------------------------------------------------------------------
+# Version flag (does not need fixture files)
+# ---------------------------------------------------------------------------
+
+class TestVersionFlag:
+    def test_version_flag_prints_project_version(self):
+        result = _run("--version")
+        assert result.returncode == 0
+        assert result.stdout.strip() == f"fs25-mod-checker {_project_version()}"
+
+    def test_version_flag_does_not_require_fixture_files(self):
+        result = _run("--version", cwd=PROJECT_ROOT)
+        assert result.returncode == 0
+        assert result.stderr == ""
 
 
 # ---------------------------------------------------------------------------
@@ -53,6 +69,10 @@ def require_fixtures():
 # ---------------------------------------------------------------------------
 
 class TestCLIHappyPath:
+    @pytest.fixture(autouse=True)
+    def _require_fixtures(self, require_fixtures):  # noqa: PT004
+        pass
+
     def test_exit_code_1_when_problems_found(self):
         result = _run(str(REAL_XML))
         # The real file has known problems, so exit code must be 1
@@ -78,16 +98,6 @@ class TestCLIHappyPath:
             "--i3d", str(REAL_I3D),
         )
         assert result.returncode in (0, 1)  # either is valid
-
-    def test_version_flag_prints_project_version(self):
-        result = _run("--version")
-        assert result.returncode == 0
-        assert result.stdout.strip() == f"fs25-mod-checker {_project_version()}"
-
-    def test_version_flag_does_not_require_fixture_files(self):
-        result = _run("--version", cwd=PROJECT_ROOT)
-        assert result.returncode == 0
-        assert result.stderr == ""
 
 
 # ---------------------------------------------------------------------------

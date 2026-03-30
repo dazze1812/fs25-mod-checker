@@ -159,8 +159,6 @@ jobs:
   build-windows-executable:
     name: Build Windows Executable
     runs-on: windows-latest
-    permissions:
-      contents: write
     needs:
       - validate-release-version
       - ruff
@@ -193,8 +191,23 @@ jobs:
           path: dist/fs25-mod-checker.exe
           if-no-files-found: error
 
+  upload-release-executable:
+    name: Upload Release Executable
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    permissions:
+      contents: write
+    needs:
+      - build-windows-executable
+
+    steps:
+      - name: Download Windows executable artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-executable
+          path: dist/
+
       - name: Upload executable to GitHub release
-        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
           files: dist/fs25-mod-checker.exe
