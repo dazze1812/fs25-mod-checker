@@ -63,6 +63,8 @@ def load_i3d_nodes(i3d_path: Path) -> dict[str, I3dNode]:
     except (ET.ParseError, OSError) as exc:
         raise ValueError(f"Failed to parse I3D file {i3d_path}: {exc}") from exc
     root = tree.getroot()
+    if root is None:
+        raise ValueError(f"No root element found in {i3d_path}")
     scene = root.find("Scene")
     if scene is None:
         raise ValueError(f"No <Scene> element found in {i3d_path}")
