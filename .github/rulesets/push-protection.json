@@ -1,0 +1,19 @@
+{
+  "name": "Push Protection",
+  "target": "push",
+  "enforcement": "active",
+  "rules": [
+    {
+      "type": "max_file_size",
+      "parameters": {
+        "max_file_size": 10240
+      }
+    },
+    {
+      "type": "max_file_path_length",
+      "parameters": {
+        "max_file_path_length": 255
+      }
+    }
+  ]
+}
