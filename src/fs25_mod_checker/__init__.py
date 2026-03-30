@@ -13,10 +13,30 @@ PACKAGE_NAME = "fs25-mod-checker"
 
 
 def _read_pyproject_version() -> str:
-    """Read the project version from pyproject.toml for source-tree execution."""
-    pyproject_path = Path(__file__).resolve().parents[2] / "pyproject.toml"
-    pyproject_data = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
-    return pyproject_data["project"]["version"]
+    """Read the project version from a nearby pyproject.toml when available."""
+    candidates: list[Path] = []
+
+    # Source-tree and editable install paths.
+    this_file = Path(__file__).resolve()
+    for parent in [this_file.parent, *this_file.parents]:
+        candidates.append(parent / "pyproject.toml")
+
+    # PyInstaller one-file extraction directory.
+    meipass = getattr(sys, "_MEIPASS", None)
+    if meipass:
+        candidates.append(Path(meipass) / "pyproject.toml")
+
+    seen: set[Path] = set()
+    for pyproject_path in candidates:
+        if pyproject_path in seen:
+            continue
+        seen.add(pyproject_path)
+        if not pyproject_path.exists():
+            continue
+        pyproject_data = tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
+        return pyproject_data["project"]["version"]
+
+    raise FileNotFoundError("pyproject.toml not found")
 
 
 def get_version() -> str:
