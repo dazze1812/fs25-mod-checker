@@ -398,6 +398,8 @@ def load_xml_files_from_moddesc(mod_folder: Path) -> list[Path]:
     except ET.ParseError as exc:
         raise ValueError(f"Failed to parse modDesc.xml: {exc}") from exc
     root = tree.getroot()
+    if root is None:
+        raise ValueError(f"No root element found in {moddesc_path}")
     xml_files: list[Path] = []
     for store_item in root.iter("storeItem"):
         filename = store_item.get("xmlFilename")
