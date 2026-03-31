@@ -7,7 +7,7 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as package_version
 from pathlib import Path
 
-from .checker import run_checks
+from .checker import run_checks_for_mod
 
 PACKAGE_NAME = "fs25-mod-checker"
 
@@ -63,13 +63,16 @@ def _create_mod_zip(workspace: Path, output_zip: Path | None = None) -> Path:
     excluded_top_level = {
         ".git",
         ".vscode",
-        ".pytest_cache",
-        ".coverage",
         ".venv",
-        "build",
+        "venv",
         "dist",
-        "fs25-mod-checker.spec",
-        "FS25 Mod Checker.spec",
+        "build",
+        ".pytest_cache",
+        "__pycache__",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".coverage",
+        "htmlcov",
     }
 
     workspace = workspace.resolve()
@@ -117,7 +120,7 @@ def _resolve_checker_command() -> tuple[str, list[str]]:
     return (python_cmd, ["-m", "fs25_mod_checker"])
 
 
-def _init_workspace() -> None:
+def _init_workspace(mod_folder: Path | None = None) -> None:
     """Initialize VS Code workspace with tasks for checking and packaging the mod."""
     cwd = Path.cwd()
     vscode_dir = cwd / ".vscode"
@@ -146,13 +149,19 @@ def _init_workspace() -> None:
     
     # Resolve the checker command and args
     command, command_args = _resolve_checker_command()
-    
+
+    # Build args for the Check Mod task: base args + mod folder path.
+    if mod_folder is not None:
+        check_mod_args = [*command_args, str(mod_folder.resolve())]
+    else:
+        check_mod_args = list(command_args)
+
     if not check_task:
         check_task = {
             "label": "Check Mod (fs25-mod-checker)",
             "type": "shell",
             "command": command,
-            "args": command_args,
+            "args": check_mod_args,
             "problemMatcher": [
                 {
                     "name": "fs25-mod-checker",
@@ -180,16 +189,9 @@ def _init_workspace() -> None:
         }
         tasks_data["tasks"].append(check_task)
     else:
-        # Update command and args for existing task, and migrate legacy arg forms.
+        # Update command and always refresh args (including mod folder).
         check_task["command"] = command
-        existing_args = check_task.get("args") or []
-
-        # If command is direct fs25-mod-checker executable, remove legacy
-        # "-m fs25_mod_checker" prefix but keep any user XML/i3d args.
-        if command_args == [] and len(existing_args) >= 2 and existing_args[:2] == ["-m", "fs25_mod_checker"]:
-            check_task["args"] = existing_args[2:]
-        elif not existing_args:
-            check_task["args"] = command_args
+        check_task["args"] = check_mod_args
     
     # Find existing "Package Mod" task
     package_task = None
@@ -227,34 +229,30 @@ def _init_workspace() -> None:
     print("[OK] Created/updated .vscode/tasks.json")
     print()
     print("Next steps:")
-    print("1. Edit .vscode/tasks.json and add the XML file path to the 'Check Mod' task args")
+    if mod_folder is None:
+        print("1. Edit .vscode/tasks.json and add the mod folder path to the 'Check Mod' task args")
     print("2. Run 'Terminal > Run Task' to:")
-    print("   - Check Mod (fs25-mod-checker) - validates i3dMappings")
+    print("   - Check Mod (fs25-mod-checker) - validates i3dMappings in the mod folder")
     print("   - Package Mod (Create ZIP) - creates a release zip file")
 
 
 def main() -> None:
     """Main CLI entry point."""
     import argparse
-    
+
     parser = argparse.ArgumentParser(
         prog="fs25-mod-checker",
-        description="Validates i3dMappings in FS25 mod files"
+        description="Validates i3dMappings in all FS25 mod XML files listed in modDesc.xml"
     )
     parser.add_argument(
-        "xml_file",
+        "mod_folder",
         nargs="?",
-        help="Path to the i3dMappings XML file (e.g., vehicles/MyMod/MyMod.xml)"
+        help="Path to the mod folder (must contain modDesc.xml)"
     )
     parser.add_argument(
         "--init",
         action="store_true",
-        help="Initialize VS Code workspace with tasks"
-    )
-    parser.add_argument(
-        "--i3d",
-        dest="i3d_file",
-        help="Optional path to the corresponding .i3d file"
+        help="Initialize VS Code workspace with tasks (uses mod_folder if provided)"
     )
     parser.add_argument(
         "--package",
@@ -271,11 +269,12 @@ def main() -> None:
         dest="output_zip",
         help="Optional output ZIP path used with --package"
     )
-    
+
     args = parser.parse_args()
-    
+
     if args.init:
-        _init_workspace()
+        mod_folder_for_init = Path(args.mod_folder) if args.mod_folder else None
+        _init_workspace(mod_folder_for_init)
         return
 
     if args.package:
@@ -283,31 +282,49 @@ def main() -> None:
         zip_path = _create_mod_zip(Path.cwd(), output_zip)
         print(f"[OK] Created {zip_path}")
         return
-    
-    if not args.xml_file:
+
+    if not args.mod_folder:
         parser.print_help()
         sys.exit(2)
-    
-    xml_path = Path(args.xml_file)
-    
-    if not xml_path.exists():
-        print(f"Error: File not found: {xml_path}", file=sys.stderr)
+
+    mod_folder = Path(args.mod_folder)
+
+    if not mod_folder.exists():
+        print(f"Error: Path not found: {mod_folder}", file=sys.stderr)
         sys.exit(1)
-    
-    # Use explicit i3d path when provided, otherwise infer from XML path.
-    i3d_path = Path(args.i3d_file) if args.i3d_file else xml_path.with_suffix(".i3d")
-    
-    if not i3d_path.exists():
-        print(f"Error: I3D file not found: {i3d_path}", file=sys.stderr)
+
+    if not mod_folder.is_dir():
+        print(f"Error: Not a directory: {mod_folder}", file=sys.stderr)
         sys.exit(1)
-    
-    # Run all checks
-    problems = run_checks(xml_path, i3d_path)
-    
-    # Output results in VS Code problem matcher format
-    if problems:
+
+    moddesc_path = mod_folder / "modDesc.xml"
+    if not moddesc_path.exists():
+        print(f"Error: modDesc.xml not found in: {mod_folder}", file=sys.stderr)
+        sys.exit(1)
+
+    # Run checks for all XML files listed in modDesc.xml.
+    # The I3D path for each XML is read from the <filename> element inside the
+    # XML, falling back to replacing the .xml suffix with .i3d.
+    results = run_checks_for_mod(mod_folder)
+
+    if not results:
+        print(
+            "Warning: No XML/I3D pairs were checked. "
+            "All storeItem files may be missing or have no matching I3D.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    has_problems = False
+    for xml_path, problems in results:
         for problem in problems:
-            print(f"{xml_path.resolve()}:{problem.line_number}:1: warning: {problem.rule_id}: {problem.message}")
+            print(
+                f"{xml_path.resolve()}:{problem.line_number}:1: warning:"
+                f" {problem.rule_id}: {problem.message}"
+            )
+            has_problems = True
+
+    if has_problems:
         sys.exit(1)
     else:
-        print(f"[OK] No problems found in {xml_path}")
+        print(f"[OK] No problems found in {mod_folder}")

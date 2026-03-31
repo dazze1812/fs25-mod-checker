@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="S60levelingBeam.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="10" filename="$data/shared/default_normal.dds"/>
+    <File fileId="4" filename="../../assets/gen_wear_dirt_2.dds"/>
+    <File fileId="3" filename="S60levelingBeam_normal.dds"/>
+    <File fileId="5" filename="vehicleShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="baseMat" materialId="5" diffuseColor="0 0 0 1" customShaderId="5" customShaderVariation="colorMask">
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+      <CustomParameter name="colorMat0" value="0.03 0.03 0.03 0"/>
+      <CustomParameter name="colorMat1" value="0.723 0.423 0 0"/>
+    </Material>
+    <Material name="default" materialId="6" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="default_mat" materialId="7" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0">
+      <Normalmap fileId="10"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="S60levelingBeam.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="levelingBeam_main_component1" rotation="-6.83019e-06 -0 0" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="300" nodeId="14" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6">
+      <Shape name="levelingBeam_vis" translation="-6.81578e-08 -7.10543e-15 0.78" rotation="8.65142e-06 5.97114e-13 2.23118e-05" shapeId="2" nodeId="15" castsShadows="true" receiveShadows="true" materialIds="5">
+        <TransformGroup name="attacherJoint" translation="3.51968e-07 0.615053 -0.146844" rotation="-90 -1.73028e-05 -90" nodeId="16"/>
+        <TransformGroup name="effects" translation="1.36315e-07 -2.10661e-07 -0.779634" rotation="-2.9142e-05 -3.0361e-12 -1.86693e-05" nodeId="17">
+          <Shape name="levelingBeamEffectNode" translation="0 4.86667e-08 0.709398" rotation="-6.83019e-06 -0 0" scale="1.161 1 1" shapeId="3" visibility="false" clipDistance="300" nodeId="18" castsShadows="true" receiveShadows="true" materialIds="7"/>
+        </TransformGroup>
+        <TransformGroup name="levelerNode" translation="1.36316e-07 1.19938e-07 -0.00936782" rotation="-2.4133e-05 -3.18434e-13 -1.00179e-05" nodeId="19">
+          <TransformGroup name="levelerNodeRef" translation="1.49959 0 0" rotation="-6.83019e-06 -0 0" nodeId="20"/>
+        </TransformGroup>
+        <TransformGroup name="occlusionAreas" translation="1.36315e-07 -2.10661e-07 -0.779634" rotation="-2.9142e-05 -3.0361e-12 -1.86693e-05" nodeId="21"/>
+        <TransformGroup name="occlustionArea01Height" translation="1.34037 -7.32599e-07 -0.976319" rotation="-2.9142e-05 -3.0361e-12 -1.86693e-05" nodeId="22"/>
+        <TransformGroup name="occlustionArea01Start" translation="1.34037 -3.08943e-07 0.00181603" rotation="-2.9142e-05 -3.0361e-12 -1.86693e-05" nodeId="23"/>
+        <TransformGroup name="occlustionArea01Width" translation="-1.34037 5.64553e-07 0.00181603" rotation="-2.9142e-05 -3.0361e-12 -1.86693e-05" nodeId="24"/>
+        <TransformGroup name="rollerRot" translation="-1.92929e-23 0.139251 -0.335" rotation="-1.73028e-05 -0 -1.62844e-12" nodeId="25">
+          <TransformGroup name="rollerPhy" rotation="-6.83019e-06 -0 0" nodeId="26">
+            <Shape name="rollerWheel_vis" translation="0 -0.02 -0.544" rotation="1.54816e-05 -1.38423e-12 5.00895e-06" shapeId="4" nodeId="27" castsShadows="true" receiveShadows="true" materialIds="5"/>
+          </TransformGroup>
+        </TransformGroup>
+      </Shape>
+      <TransformGroup name="zCollisions" rotation="-6.83019e-06 -0 0" nodeId="28">
+        <Shape name="colPart01" translation="0 0.407513 0.416002" rotation="-6.83019e-06 -0 0" shapeId="5" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="29" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+</i3D>

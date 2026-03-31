@@ -46,10 +46,17 @@ Copilot will:
 
 Copilot will help you run:
 ```cmd
+fs25-mod-checker path\to\mod --init
+```
+
+This automatically creates `.vscode/tasks.json` with Check Mod and Package Mod tasks, with the Check Mod task pre-filled with the mod folder path.
+
+Alternatively, without a mod folder:
+```cmd
 fs25-mod-checker --init
 ```
 
-This automatically creates `.vscode/tasks.json` with Check Mod and Package Mod tasks, including problem matcher configuration.
+Then manually add the mod folder path to the Check Mod task args.
 
 ### Testing & Coverage
 
@@ -94,12 +101,16 @@ fs25-mod-checker/
 - `check_duplicate_node_paths()` — Rule: `duplicate-node-path`
 - `check_unused_mappings()` — Rules: `unused-mapping-id*` (3 variants)
 - `check_references()` — Rules: `reference-to-non-existent-*` (2 variants)
+- `check_missing_reference_files()` — Rule: `missing-reference-file`
 
-**Utilities:**
+**Mod folder functions:**
+- `load_xml_files_from_moddesc(Path) → list[Path]` — Parse modDesc.xml and return storeItem XML paths
+- `run_checks_for_mod(Path) → list[tuple[Path, list[Problem]]]` — Run all checks for all XML files in mod
+
+**Single file functions:**
 - `load_i3d_nodes(Path) → dict[str, I3dNode]` — Parse I3D node structure
 - `load_i3d_mappings(Path) → dict[str, I3dMapping]` — Parse XML mappings
-- `deduplicate_problems(list[Problem]) → list[Problem]` — Sort & deduplicate
-- `run_checks(Path, Path) → list[Problem]` — Orchestrate all checks
+- `run_checks(Path, Path, Path) → list[Problem]` — Orchestrate all checks for one XML/i3d pair
 
 **Data Classes:**
 - `Problem(rule_id, line_number, message)`
@@ -112,8 +123,9 @@ Entry point: `main()` — Parses args, runs checks, prints results in problem ma
 
 ### `tests/`
 
-- `test_checker.py` — 48 unit tests covering every function; 100% coverage on checker.py
-- `test_integration.py` — 19 integration tests running the CLI entry point; tests clean/error/init cases
+- `test_checker.py` — 66 unit tests covering all check functions and mod folder utilities; 98% coverage on checker.py
+- `test_integration.py` — 20 integration tests running the CLI entry point with various mod folder scenarios
+- `fixtures/FS25_VolvoEWR150E_Fippe3DModding/` — Real FS25 mod fixture with minimal referenced files
 
 ## Common Tasks
 
@@ -147,19 +159,20 @@ def check_my_new_rule(xml_lines: list[str], ...) -> list[Problem]:
 
 ### Initialize New Workspace
 
-Run from the root of a FS25 mod project:
+Run from the root of a FS25 mod project (with modDesc.xml):
 
 ```cmd
-fs25-mod-checker --init
+fs25-mod-checker . --init
 ```
 
 This:
 1. Creates `.vscode/` directory if not present
 2. Generates/updates `tasks.json` with Check Mod and Package Mod tasks
-3. Embeds problem matcher regex for parsing output
-4. Prints next steps and example args
+3. Pre-fills the Check Mod task with the current folder path
+4. Embeds problem matcher regex for parsing output
+5. Prints next steps and run instructions
 
-Then edit `.vscode/tasks.json` to set the XML file path in the Check Mod args.
+You can immediately run the Check Mod task without editing.
 
 ## Testing Strategies
 
@@ -177,7 +190,7 @@ Test CLI behavior by running the entry point as a subprocess.
 
 ### Real Fixture Tests
 
-Uses `tests/fixtures/VolvoEWR150E.{xml,i3d}` — a real FS25 mod with ~199 known problems.
+Uses `tests/fixtures/FS25_VolvoEWR150E_Fippe3DModding/` — a real FS25 mod with modDesc.xml and all referenced XML/i3D files. Non-XML/i3D files are empty stubs to minimize repository size.
 
 ## Dependencies
 
@@ -207,8 +220,9 @@ Output binary name: `fs25-mod-checker.exe` (in `dist/`)
 
 - Parsing I3D XML: `O(n_nodes)` — fast for typical mods
 - Parsing mappings: `O(n_mappings)` — linear scan
-- Unused mapping check: `O(n_mappings × n_lines)` — uses regex matching; slowest but still <1s for real mods
-- Total: ~1-2 seconds for FS25_VolvoEWR150E (427 mappings, 453 nodes, ~2000 XML lines)
+- Unused mapping check: `O(n_mappings × n_lines)` — uses regex matching
+- Missing file references: `O(n_refs × mod_files)` — disk access for each reference
+- Total across all XML files in mod: ~1-2 seconds for typical mid-size mods
 
 ## Version & Release Info
 

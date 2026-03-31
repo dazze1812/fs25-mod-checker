@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="shovelLeveler" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs22/vehicle.xsd">
+    <annotation>Copyright (C) North Modding Company AB, All Rights Reserved.</annotation>
+
+    <storeData>
+        <name>S60 Cable Bucket</name>
+        <functions>
+            <function>$l10n_function_frontloaderShovel</function>
+        </functions>
+        <image>vehicles/S60cableBucket/store_cableBucket.png</image>
+        <price>3000</price>
+        <lifetime>600</lifetime>
+        <rotation>0</rotation>
+        <brand>ENGCON</brand>
+        <category>forestryExcavatorTools</category>
+        <shopTranslationOffset>0 0 0</shopTranslationOffset>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_excavatorTool</typeDesc>
+        <filename>vehicles/S60cableBucket/S60cableBucket.i3d</filename>
+        <size width="2.3" length="2" height="1.1" lengthOffset="-0.454"/>
+        <components>
+            <component centerOfMass="0 0.42 -0.51" solverIterationCount="10" mass="235" />
+        </components>
+        <schemaOverlay attacherJointPosition="0 0" name="IMPLEMENT" />
+        <mapHotspot type="TOOL" />
+    </base>
+
+    <attachable>
+        <inputAttacherJoints>
+            <inputAttacherJoint node="attacherJoint" jointType="wheelLoader" >
+				<subType name="S60" showWarning="false"/>
+            </inputAttacherJoint>
+        </inputAttacherJoints>
+    </attachable>
+
+    <fillUnit>
+        <fillUnitConfigurations>
+            <fillUnitConfiguration>
+                <fillUnits>
+                    <fillUnit shopDisplayUnit="LITER" fillTypeCategories="SHOVEL" capacity="500" >
+                        <exactFillRootNode node="exactFillRootNode" />
+                    </fillUnit>
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" fillTypeCategories="SHOVEL" capacity="10000" showInShop="false" showOnHud="false"/>
+                </fillUnits>
+            </fillUnitConfiguration>
+        </fillUnitConfigurations>
+    </fillUnit>
+
+    <fillVolume>
+        <fillVolumeConfigurations>
+            <fillVolumeConfiguration>
+                <volumes>
+                    <volume node="fillVolume" maxDelta="0.5" maxAllowedHeapAngle="30" fillUnitIndex="1" maxSubDivEdgeLength="0.6" />
+                </volumes>
+            </fillVolumeConfiguration>
+        </fillVolumeConfigurations>
+
+        <loadInfos>
+            <loadInfo>
+                <node node="fillVolumeLoadNode" width="2.0" length="0.1" />
+            </loadInfo>
+        </loadInfos>
+
+        <unloadInfos>
+            <unloadInfo>
+                <node node="fillVolumeUnloadNode" width="2.0" length="0.1" />
+            </unloadInfo>
+        </unloadInfos>
+    </fillVolume>
+
+    <dischargeable requiresTipOcclusionArea="false">
+        <dischargeNode node="dischargeNode" fillUnitIndex="1" emptySpeed="2000" >
+            <raycast node="dischargeNode" maxDistance="30" useWorldNegYDirection="true" yOffset="2"/>
+            <info width="2.0" length="1" zOffset="0.5"/>
+
+            <effects>
+                <effectNode effectClass="TipEffect">
+                    <effectNode effectNode="emitterShape" effectClass="ParticleEffect" materialType="unloadingParticle"/>
+                    <effectNode effectNode="grainEffect" materialType="unloading" fadeTime="0.5" alignXAxisToWorldY="true" extraDistance="0.15"/>
+                </effectNode>
+                <effectNode effectNode="smokeEffect" materialType="unloadingSmoke" fadeTime="0.5" />
+            </effects>
+        </dischargeNode>
+    </dischargeable>
+
+    <shovel>
+        <shovelNode node="shovelNode" fillUnitIndex="1" loadInfoIndex="1" width="2" length="0.5" needsMovement="true" ignoreFarmlandState="true" maxPickupAngle="145"/>
+        <dischargeInfo node="dischargeNode" minSpeedAngle="125" maxSpeedAngle="180" />
+    </shovel>
+
+    <leveler fillUnitIndex="2" maxFillLevelPerMS="30" ignoreFarmlandState="true">
+        <levelerNode node="levelerNode" width="2" zOffset="0.2" minDropWidth="1" maxDropWidth="2.5" minDropDirOffset="1" maxDropDirOffset="1.5" minFillLevel="0.85">
+            <smoothing allowed="true" radius="0.5" overlap="1.7" direction="0"/>
+        </levelerNode>
+
+        <pickUpDirection>1</pickUpDirection>
+    </leveler>
+
+    <suspensions>
+        <suspension node="levelerNode" weight="150" minTranslation="0 -0.5 0.0" maxTranslation="0.0 0.5 0.0" suspensionParametersX="20 4" suspensionParametersY="1 1" suspensionParametersZ="20 4" serverOnly="true"/>
+    </suspensions>
+
+    <ai>
+        <agentAttachment width="2" height="1.05" length="1.51" lengthOffset="-0.454"/>
+    </ai>
+
+    <foliageBending>
+        <bendingNode minX="-1" maxX="1" minZ="-1.2" maxZ="0.3" yOffset="0.02" />
+    </foliageBending>
+
+    <wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
+    <washable dirtDuration="90" washDuration="1" workMultiplier="6" fieldMultiplier="2"/>
+
+    <i3dMappings>
+        <i3dMapping id="gradingBucket1300S70_main_component1" node="0>" />
+        <i3dMapping id="gradingBucket1300S70_vis" node="0>0" />
+        <i3dMapping id="attacherJoint" node="0>0|0" />
+        <i3dMapping id="emitterShape" node="0>0|1|0" />
+        <i3dMapping id="grainEffect" node="0>0|1|1" />
+        <i3dMapping id="smokeEffect" node="0>0|1|2" />
+        <i3dMapping id="dischargeNode" node="0>0|2|0" />
+        <i3dMapping id="exactFillRootNode" node="0>0|2|1" />
+        <i3dMapping id="fillVolume" node="0>0|2|2" />
+        <i3dMapping id="fillVolumeLoadNode" node="0>0|2|3" />
+        <i3dMapping id="fillVolumeUnloadNode" node="0>0|2|4" />
+        <i3dMapping id="levelerNode" node="0>0|2|5" />
+        <i3dMapping id="shovelNode" node="0>0|2|6" />
+    </i3dMappings>
+</vehicle>

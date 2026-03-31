@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="dynamicMountAttacherForks" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="$data/shared/xml/schema/vehicle.xsd">
+    <annotation>Copyright (C) GIANTS Software GmbH, All Rights Reserved.</annotation>
+
+    <storeData>
+        <name>S60 Pallet Fork</name>
+        <image>vehicles/S60palletForks/store_palletFork.dds</image>
+        <price>2000</price>
+        <lifetime>600</lifetime>
+        <rotation>0</rotation>
+        <brand>ENGCON</brand>
+        <category>forestryExcavatorTools</category>
+		<shopTranslationOffset>0 0.5 0</shopTranslationOffset>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_wheelLoaderTool</typeDesc>
+        <filename>vehicles/S60palletForks/S60EngconForks.i3d</filename>
+        <size width="2.5" length="2.3" height="1.5"/>
+        <components>
+            <component centerOfMass="0 -0.3 0" solverIterationCount="10" mass="350" />
+        </components>
+        <schemaOverlay attacherJointPosition="0 0" name="IMPLEMENT" />
+    </base>
+
+	<attachable>
+        <inputAttacherJoints>
+            <inputAttacherJoint node="attacherJoint" jointType="wheelLoader" >
+                <subType name="S60" showWarning="false"/>
+            </inputAttacherJoint>
+        </inputAttacherJoints>
+    </attachable>
+	
+	<tensionBelts>
+        <tensionBeltsConfigurations title="$l10n_configuration_tensionBelts" isYesNoOption="true">
+			<tensionBeltsConfiguration name="$l10n_configuration_valueNo" price="0" isDefault="true"/>
+			<tensionBeltsConfiguration name="$l10n_configuration_valueYes" price="0">
+                <tensionBelts linkNode="forkBase_vis" jointNode="forks_main_component" width="0.05" maxEdgeLength="0.1" geometryBias="0.01" ratchetPosition="0.25" defaultOffset="0.1" defaultOffsetSide="0.1" defaultHeight="4" activationTrigger="beltActivationTrigger">
+					<tensionBelt linkNode="leftForkDummy" startNode="tensionBeltLeftStart" endNode="tensionBeltLeftEnd">
+						<intersectionNode node="tensionBeltLeftIntersection"/>
+					</tensionBelt>
+                    <tensionBelt linkNode="rightForkDummy" startNode="tensionBeltRightStart" endNode="tensionBeltRightEnd">
+						<intersectionNode node="tensionBeltRightIntersection"/>
+					</tensionBelt>
+
+                    <sounds>
+                        <addBelt template="beltOpen" />
+                        <removeBelt template="beltClose" />
+                    </sounds>
+                </tensionBelts>
+            </tensionBeltsConfiguration>
+		</tensionBeltsConfigurations>
+    </tensionBelts>
+
+    <dynamicMountAttacher node="jointNode">
+        <fork node="leftForkCol1"/>
+        <fork node="rightForkCol1"/>
+    </dynamicMountAttacher>
+
+	<ai>
+        <agentAttachment width="2" height="1.05" length="1.51" lengthOffset="-0.454"/>
+    </ai>
+    
+	<cylindered>
+        <movingTools>
+			<movingTool node="leftForkDummy" delayedNode="leftFork_vis">
+                <controls axis="AXIS_FRONTLOADER_TOOL5" invertAxis="false" mouseSpeedFactor="0.2" iconName="WORKING_WIDTH_TRANSLATE_X" />
+                <dependentMovingTool node="rightForkDummy" speedScale="-1"/>
+                <translation translationAxis="1" transSpeed="0.25" transAcceleration="50" transMin="0.124" transMax="0.49" startTrans="0.278"/>
+            </movingTool>
+            <movingTool node="rightForkDummy" delayedNode="rightFork_vis">
+                <translation translationAxis="1" transSpeed="0.25" transAcceleration="50" transMin="-0.49" transMax="-0.124" startTrans="-0.278"/>
+            </movingTool>
+        </movingTools>
+		
+        <sounds>
+            <actionSound template="hingeMedium" pitchScale="0.6" volumeScale="2" linkNode="leftForkDummy" actionNames="TOOL_MOVE_POS TOOL_MOVE_NEG " nodes="leftForkDummy"/>
+            <actionSound template="clackVar6"   pitchScale="1"   volumeScale="1" linkNode="leftForkDummy" actionNames="TOOL_MOVE_END_POS_LIMIT"      nodes="leftForkDummy"/>
+            <actionSound template="clackVar6"   pitchScale="0.8" volumeScale="1" linkNode="leftForkDummy" actionNames="TOOL_MOVE_END_NEG_LIMIT"      nodes="leftForkDummy"/>
+        </sounds>
+    </cylindered>
+	
+	<foliageBending>
+        <bendingNode minX="-1.169" maxX="1.169" minZ="-0.27" maxZ="0.141" yOffset="-0.3" node="forks_main_component" />
+        <bendingNode minX="-0.107" maxX="0.107" minZ="0" maxZ="2.071" yOffset="-0.532" node="leftForkDummy" />
+        <bendingNode minX="-0.107" maxX="0.107" minZ="0" maxZ="2.071" yOffset="-0.532" node="rightForkDummy" />
+    </foliageBending>
+    
+	<wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
+    <washable dirtDuration="90" washDuration="1" workMultiplier="2" fieldMultiplier="2"/>
+	
+	<tensionBeltObject>
+        <meshNodes>
+            <meshNode node="forks_main_component"/>
+        </meshNodes>
+    </tensionBeltObject>
+	
+    <i3dMappings>
+	  <i3dMapping id="forks_main_component" node="0>" />
+	  <i3dMapping id="attacherJoint" node="0>0" />
+	  <i3dMapping id="forkBase_vis" node="0>1" />
+	  <i3dMapping id="leftFork_vis" node="0>1|0" />
+	  <i3dMapping id="rightFork_vis" node="0>1|1" />
+	  <i3dMapping id="leftForkDummy" node="0>1|2" />
+	  <i3dMapping id="leftForkCol1" node="0>1|2|0" />
+	  <i3dMapping id="leftForkCol2" node="0>1|2|1" />
+	  <i3dMapping id="leftForkCol3" node="0>1|2|2" />
+	  <i3dMapping id="tensionBeltLeftStart" node="0>1|2|3" />
+	  <i3dMapping id="tensionBeltLeftEnd" node="0>1|2|3|0" />
+	  <i3dMapping id="tensionBeltLeftIntersection" node="0>1|2|3|1" />
+	  <i3dMapping id="rightForkDummy" node="0>1|3" />
+	  <i3dMapping id="rightForkCol1" node="0>1|3|0" />
+	  <i3dMapping id="rightForkCol2" node="0>1|3|1" />
+	  <i3dMapping id="rightForkCol3" node="0>1|3|2" />
+	  <i3dMapping id="tensionBeltRightStart" node="0>1|3|3" />
+	  <i3dMapping id="tensionBeltRightEnd" node="0>1|3|3|0" />
+	  <i3dMapping id="tensionBeltRightIntersection" node="0>1|3|3|1" />
+	  <i3dMapping id="decals" node="0>1|4" />
+	  <i3dMapping id="beltActivationTrigger" node="0>1|5" />
+	  <i3dMapping id="zCollisions" node="0>2" />
+	  <i3dMapping id="col" node="0>2|0" />
+	  <i3dMapping id="col.001" node="0>2|1" />
+	  <i3dMapping id="jointNode" node="0>3" />
+	</i3dMappings>
+</vehicle>
