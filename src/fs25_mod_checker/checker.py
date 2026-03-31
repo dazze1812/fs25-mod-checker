@@ -309,6 +309,8 @@ def _extract_file_references_from_i3d(i3d_path: Path) -> dict[str, list[int]]:
         return refs
 
     root = tree.getroot()
+    if root is None:
+        return refs
 
     # Iterate over all <Files>/<File> elements and collect filename attributes.
     for files_elem in root.findall(".//Files"):
@@ -421,6 +423,8 @@ def _extract_i3d_path_from_xml(xml_path: Path, mod_folder: Path) -> Path | None:
     except ET.ParseError:
         return None
     root = tree.getroot()
+    if root is None:
+        return None
     for elem in root.iter("filename"):
         text = (elem.text or "").strip()
         if text.lower().endswith(".i3d"):
