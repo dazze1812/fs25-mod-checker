@@ -542,10 +542,82 @@ class TestCheckMissingReferenceFiles:
         problems = check_missing_reference_files(xml_file, i3d_file, mod)
         assert problems == []
 
+    def test_i3d_relative_path_resolved_from_i3d_dir(self, tmp_path: Path):
+        """I3D file references are resolved relative to the I3D file's directory."""
+        mod = tmp_path / "mod"
+        sub = mod / "vehicles" / "myVehicle"
+        sub.mkdir(parents=True)
+        assets = mod / "assets"
+        assets.mkdir()
+
+        xml_file = sub / "myVehicle.xml"
+        xml_file.write_text('<?xml version="1.0"?>\n<vehicle>\n</vehicle>\n', encoding="utf-8")
+
+        i3d_file = sub / "myVehicle.i3d"
+        # Reference uses ../ to go up to mod/assets/ relative to the i3d dir
+        i3d_file.write_text(
+            '<?xml version="1.0"?>\n<i3D>\n'
+            '  <Files>\n'
+            '    <File fileId="1" filename="../../assets/texture.dds"/>\n'
+            '  </Files>\n'
+            '</i3D>\n',
+            encoding="utf-8",
+        )
+        (assets / "texture.dds").touch()
+
+        problems = check_missing_reference_files(xml_file, i3d_file, mod)
+        assert problems == []
+
+    def test_i3d_relative_path_missing_file(self, tmp_path: Path):
+        """Reports a problem when a relative I3D reference resolves to a missing file."""
+        mod = tmp_path / "mod"
+        sub = mod / "vehicles" / "myVehicle"
+        sub.mkdir(parents=True)
+        (mod / "assets").mkdir()
+
+        xml_file = sub / "myVehicle.xml"
+        xml_file.write_text('<?xml version="1.0"?>\n<vehicle>\n</vehicle>\n', encoding="utf-8")
+
+        i3d_file = sub / "myVehicle.i3d"
+        i3d_file.write_text(
+            '<?xml version="1.0"?>\n<i3D>\n'
+            '  <Files>\n'
+            '    <File fileId="1" filename="../../assets/missing.dds"/>\n'
+            '  </Files>\n'
+            '</i3D>\n',
+            encoding="utf-8",
+        )
+
+        problems = check_missing_reference_files(xml_file, i3d_file, mod)
+        assert len(problems) == 1
+        assert problems[0].rule_id == "missing-reference-file"
+
+    def test_i3d_path_escaping_mod_folder_ignored(self, tmp_path: Path):
+        """I3D references that escape the mod folder (e.g. game assets) are ignored."""
+        mod = tmp_path / "mod"
+        (mod / "sub").mkdir(parents=True)
+
+        xml_file = mod / "sub" / "vehicle.xml"
+        xml_file.write_text('<?xml version="1.0"?>\n<vehicle>\n</vehicle>\n', encoding="utf-8")
+
+        i3d_file = mod / "sub" / "vehicle.i3d"
+        # ../../../ would escape the mod folder entirely
+        i3d_file.write_text(
+            '<?xml version="1.0"?>\n<i3D>\n'
+            '  <Files>\n'
+            '    <File fileId="1" filename="../../../outside_mod.dds"/>\n'
+            '  </Files>\n'
+            '</i3D>\n',
+            encoding="utf-8",
+        )
+
+        problems = check_missing_reference_files(xml_file, i3d_file, mod)
+        assert problems == []
+
     def test_multiple_file_references(self, tmp_path: Path):
         mod = tmp_path / "mod"
         mod.mkdir()
-        
+
         xml_file = mod / "test.xml"
         xml_file.write_text(
             '<?xml version="1.0"?>\n<vehicle>\n'
@@ -555,7 +627,7 @@ class TestCheckMissingReferenceFiles:
             encoding="utf-8",
         )
         (mod / "good.png").touch()
-        
+
         i3d_file = mod / "test.i3d"
         i3d_file.write_text(
             '<?xml version="1.0"?>\n<i3D>\n'
@@ -565,7 +637,7 @@ class TestCheckMissingReferenceFiles:
             '</i3D>\n',
             encoding="utf-8",
         )
-        
+
         problems = check_missing_reference_files(xml_file, i3d_file, mod)
         # Should find bad.png missing and shader.xml missing
         assert len(problems) == 2
@@ -762,8 +834,8 @@ class TestRunChecksForMod:
         assert isinstance(results, list)
         assert all(isinstance(r, tuple) and len(r) == 2 for r in results)
 
-    def test_i3d_derived_from_xml_name(self, tmp_path: Path, capsys):
-        """i3d path is xml_path.with_suffix('.i3d') — name must match."""
+    def test_i3d_path_falls_back_to_stem_matching(self, tmp_path: Path, capsys):
+        """Falls back to stem-matching when XML has no <filename> element."""
         mod = tmp_path / "TestMod"
         mod.mkdir()
         # xml is "vehicle.xml", i3d is intentionally named "vehicle.i3d" (matches)
@@ -773,6 +845,31 @@ class TestRunChecksForMod:
         )
         (mod / "vehicle.xml").write_text(
             '<?xml version="1.0"?>\n<vehicle>\n'
+            '  <i3dMappings>\n    <i3dMapping id="n" node="0"/>\n  </i3dMappings>\n'
+            '  <component node="n"/>\n</vehicle>\n',
+            encoding="utf-8",
+        )
+        (mod / "modDesc.xml").write_text(
+            '<?xml version="1.0"?>\n<modDesc>\n  <storeItems>\n'
+            '    <storeItem xmlFilename="vehicle.xml"/>\n'
+            "  </storeItems>\n</modDesc>\n",
+            encoding="utf-8",
+        )
+        results = run_checks_for_mod(mod)
+        assert len(results) == 1
+
+    def test_i3d_path_parsed_from_xml_filename_element(self, tmp_path: Path, capsys):
+        """I3D path is read from <filename> element when stem doesn't match."""
+        mod = tmp_path / "TestMod"
+        mod.mkdir()
+        # i3d has a different stem than the xml file
+        (mod / "different.i3d").write_text(
+            '<?xml version="1.0"?>\n<i3D>\n  <Scene>\n    <Shape name="n"/>\n  </Scene>\n</i3D>\n',
+            encoding="utf-8",
+        )
+        (mod / "vehicle.xml").write_text(
+            '<?xml version="1.0"?>\n<vehicle>\n'
+            '  <storeData><filename>different.i3d</filename></storeData>\n'
             '  <i3dMappings>\n    <i3dMapping id="n" node="0"/>\n  </i3dMappings>\n'
             '  <component node="n"/>\n</vehicle>\n',
             encoding="utf-8",

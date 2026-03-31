@@ -293,23 +293,35 @@ def _extract_file_references_from_xml(xml_lines: list[str]) -> dict[str, list[in
 
 
 def _extract_file_references_from_i3d(i3d_path: Path) -> dict[str, list[int]]:
-    """Extract file paths from I3D <File filename="..."> elements.
-    
+    """Extract file paths from I3D <Files>/<File filename="..."> elements.
+
     Returns a dict mapping file path to list of line numbers where it appears.
     Filters out paths starting with $ (like $data) as those are in base game.
+    Uses XML parsing so that the I3D's declared encoding is respected.
     """
     refs: dict[str, list[int]] = defaultdict(list)
-    i3d_lines = i3d_path.read_text(encoding="utf-8").splitlines()
-    pattern = re.compile(r'<File\s+fileId="[^"]*"\s+filename="([^"]+)"')
-    
-    for line_number, line in enumerate(i3d_lines, start=1):
-        match = pattern.search(line)
-        if match:
-            path = match.group(1)
+
+    try:
+        # Let the XML parser handle encoding based on the XML declaration.
+        tree = ET.parse(i3d_path)
+    except ET.ParseError:
+        # If the I3D is not well-formed XML, fall back to no references.
+        return refs
+
+    root = tree.getroot()
+
+    # Iterate over all <Files>/<File> elements and collect filename attributes.
+    for files_elem in root.findall(".//Files"):
+        for file_elem in files_elem.findall("File"):
+            filename = file_elem.get("filename")
             # Skip game data paths and empty paths
-            if path and not path.startswith("$"):
-                refs[path].append(line_number)
-    
+            if not filename or filename.startswith("$"):
+                continue
+            # sourceline is an lxml-specific attribute; standard-library parsers
+            # (including defusedxml) do not set it, so we fall back to 1.
+            line_no = getattr(file_elem, "sourceline", 1)
+            refs[filename].append(line_no)
+
     return refs
 
 
@@ -343,14 +355,24 @@ def check_missing_reference_files(
                 message=f"Referenced file not found: '{file_path}'",
             ))
     
-    # Check I3D references (report line numbers relative to the XML file
-    # since I3D line numbers aren't as useful; use line 1 as fallback)
+    # Check I3D references.
+    # I3D file paths are relative to the I3D file's own directory, so resolve
+    # them against i3d_path.parent.  Only report a problem if the path resolves
+    # to somewhere inside mod_folder (paths escaping the mod root are base-game
+    # assets and should be silently skipped).
+    mod_folder_resolved = mod_folder.resolve()
+    i3d_dir = i3d_path.parent.resolve()
     for file_path, _ in i3d_refs.items():
-        full_path = mod_folder / file_path
+        full_path = (i3d_dir / file_path).resolve()
+        try:
+            full_path.relative_to(mod_folder_resolved)
+        except ValueError:
+            # Path escapes the mod folder – treat as an external/game asset.
+            continue
         if not full_path.exists():
             problems.append(Problem(
                 rule_id="missing-reference-file",
-                line_number=1,  # I3D files don't map to XML line numbers
+                line_number=1,  # I3D line numbers are not mapped to XML lines
                 message=f"Referenced file in I3D not found: '{file_path}'",
             ))
     
@@ -388,6 +410,24 @@ def run_checks(xml_path: Path, i3d_path: Path, mod_folder: Path | None = None) -
     return problems
 
 
+def _extract_i3d_path_from_xml(xml_path: Path, mod_folder: Path) -> Path | None:
+    """Try to find the main I3D file path declared in the XML's <filename> element.
+
+    Returns the resolved absolute path if found, or None if not found.
+    The ``<filename>`` text is treated as relative to ``mod_folder``.
+    """
+    try:
+        tree = ET.parse(xml_path)
+    except ET.ParseError:
+        return None
+    root = tree.getroot()
+    for elem in root.iter("filename"):
+        text = (elem.text or "").strip()
+        if text.lower().endswith(".i3d"):
+            return mod_folder / text
+    return None
+
+
 def load_xml_files_from_moddesc(mod_folder: Path) -> list[Path]:
     """Parse modDesc.xml and return absolute paths of all storeItem XML files."""
     moddesc_path = mod_folder / "modDesc.xml"
@@ -411,17 +451,18 @@ def load_xml_files_from_moddesc(mod_folder: Path) -> list[Path]:
 def run_checks_for_mod(mod_folder: Path) -> list[tuple[Path, list[Problem]]]:
     """Run all checks for all storeItem XML files declared in modDesc.xml.
 
-    For each XML file the matching I3D file is derived by replacing the
-    ``.xml`` suffix with ``.i3d``.  Files whose XML or I3D counterpart is
-    missing are skipped with a warning.
+    For each XML file the I3D path is read from the ``<filename>`` element
+    inside the XML.  If no such element is present, the I3D path falls back to
+    replacing the ``.xml`` suffix with ``.i3d``.  Files whose XML or I3D
+    counterpart is missing are skipped with a warning.
     """
     xml_files = load_xml_files_from_moddesc(mod_folder)
     results: list[tuple[Path, list[Problem]]] = []
     for xml_path in xml_files:
-        i3d_path = xml_path.with_suffix(".i3d")
         if not xml_path.exists():
             print(f"Warning: XML file not found, skipping: {xml_path}")
             continue
+        i3d_path = _extract_i3d_path_from_xml(xml_path, mod_folder) or xml_path.with_suffix(".i3d")
         if not i3d_path.exists():
             print(f"Warning: I3D file not found, skipping: {i3d_path}")
             continue

@@ -63,6 +63,16 @@ def _create_mod_zip(workspace: Path, output_zip: Path | None = None) -> Path:
     excluded_top_level = {
         ".git",
         ".vscode",
+        ".venv",
+        "venv",
+        "dist",
+        "build",
+        ".pytest_cache",
+        "__pycache__",
+        ".mypy_cache",
+        ".ruff_cache",
+        ".coverage",
+        "htmlcov",
     }
 
     workspace = workspace.resolve()
@@ -293,8 +303,17 @@ def main() -> None:
         sys.exit(1)
 
     # Run checks for all XML files listed in modDesc.xml.
-    # The I3D file for each XML is derived by replacing the .xml suffix with .i3d.
+    # The I3D path for each XML is read from the <filename> element inside the
+    # XML, falling back to replacing the .xml suffix with .i3d.
     results = run_checks_for_mod(mod_folder)
+
+    if not results:
+        print(
+            "Warning: No XML/I3D pairs were checked. "
+            "All storeItem files may be missing or have no matching I3D.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     has_problems = False
     for xml_path, problems in results:
