@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="S60gradingBucket.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="16" filename="$data/shaders/decalShader.xml"/>
+    <File fileId="5" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="13" filename="$data/shared/default_normal.dds"/>
+    <File fileId="8" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_diffuse.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_normal.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_specular.png"/>
+    <File fileId="15" filename="../../assets/decals.dds"/>
+    <File fileId="4" filename="../../assets/gen_wear_dirt_2.dds"/>
+    <File fileId="3" filename="gradingBucket_normal.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="decalsPNG" materialId="5" alphaBlending="true" customShaderId="16">
+      <Texture fileId="15"/>
+    </Material>
+    <Material name="default" materialId="6" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="effectMesh_mat" materialId="7" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0">
+      <Normalmap fileId="13"/>
+    </Material>
+    <Material name="Mat_Schaufel" materialId="8" diffuseColor="0.8 0.8 0.8 1" customShaderId="5">
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+      <Custommap name="detailSpecular" fileId="6"/>
+      <Custommap name="detailNormal" fileId="7"/>
+      <Custommap name="detailDiffuse" fileId="8"/>
+      <CustomParameter name="colorScale" value="0.03 0.03 0.03"/>
+      <CustomParameter name="smoothnessScale" value="0.75"/>
+      <CustomParameter name="clearCoatIntensity" value="0.1"/>
+      <CustomParameter name="clearCoatSmoothness" value="0.2"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="S60gradingBucket.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="gradingBucket_main_component1" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="300" nodeId="37" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6">
+      <Shape name="Schaufel" rotation="90 -0 0" shapeId="2" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="8">
+        <TransformGroup name="attacherJoint" translation="4.01636e-06 -0.762653 -0.883911" rotation="89.9863 -72 90" scale="1 1.00236 1" nodeId="39"/>
+        <TransformGroup name="effects" translation="0.000105473 -0.279989 2.14176e-07" rotation="-90 -0.0241095 2.10772e-09" nodeId="40">
+          <Shape name="emitterShape" translation="5.94789e-17 0.267869 -0.246525" rotation="-6.83019e-06 -0 0" shapeId="3" clipDistance="300" nodeId="41" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+          <Shape name="grainEffect" translation="0 0.12306 0.233" rotation="-6.83019e-06 -0 0" scale="0.864118 1 1" shapeId="4" visibility="false" nodeId="42" castsShadows="true" receiveShadows="true" materialIds="7"/>
+          <Shape name="smokeEffect" translation="-1.65597e-17 0.173169 0.250845" rotation="-6.83019e-06 -0 0" shapeId="5" visibility="false" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="7"/>
+        </TransformGroup>
+        <TransformGroup name="fillUnit" translation="-5.28729e-07 2.98023e-07 4.40923e-08" rotation="-90 -0.0241095 2.10772e-09" nodeId="44">
+          <TransformGroup name="dischargeNode" translation="1.94427e-16 0.875538 -0.397" rotation="-6.83019e-06 -0 0" nodeId="45"/>
+          <Shape name="exactFillRootNode" translation="5.96046e-09 0.351119 -0.743463" rotation="-6.83019e-06 -0 0" shapeId="6" visibility="false" kinematic="true" compound="true" collisionFilterGroup="0x40000000" collisionFilterMask="0x40000000" nodeId="46" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+          <Shape name="fillVolume" translation="-1.49012e-08 0.245473 -1.08824" rotation="57.8414 5.07867e-15 -1.0138e-14" shapeId="7" clipDistance="300" nodeId="47" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+          <TransformGroup name="fillVolumeLoadNode" translation="9.85445e-18 0.0443805 0" rotation="-6.83019e-06 -0 0" nodeId="48"/>
+          <TransformGroup name="fillVolumeUnloadNode" translation="1.94427e-16 0.875538 -0.396679" rotation="-6.83019e-06 -0 0" nodeId="49"/>
+          <TransformGroup name="levelerNode" translation="0 -2.10291e-08 0.00964735" rotation="-6.83019e-06 -0 0" nodeId="50"/>
+          <TransformGroup name="shovelNode" translation="0 1.31134e-08 0.01" rotation="-6.83019e-06 -0 0" nodeId="51"/>
+        </TransformGroup>
+        <TransformGroup name="visuals" translation="0.000105448 2.98023e-07 8.86502e-08" rotation="-90 -0.0241095 2.10772e-09" nodeId="52">
+          <Shape name="decalsGradingBucket" translation="0.000558162 9.72555e-05 0.00953547" rotation="1.9144e-05 -7.72182e-06 10.7444" scale="1.0023 1.00337 1.0023" shapeId="8" nodeId="53" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        </TransformGroup>
+      </Shape>
+      <TransformGroup name="zCollisions" nodeId="54">
+        <Shape name="col1" translation="0.872164 0 -0.872184" shapeId="9" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="55" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col10" translation="0.872164 0 -0.872184" shapeId="10" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="56" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col11" translation="0.872164 0 -0.872184" shapeId="11" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="57" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col12" translation="0.872164 0 -0.872184" shapeId="12" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="58" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col13" translation="0.872164 0 -0.872184" shapeId="13" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="59" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col14" translation="0.872164 0 -0.872184" shapeId="14" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="60" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col15" translation="0.872164 0 -0.872184" shapeId="15" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="61" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col16" translation="0.872164 0 -0.872184" shapeId="16" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="62" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col17" translation="0.872164 0 -0.872184" shapeId="17" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="63" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col18" translation="0.872164 0 -0.872184" shapeId="18" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="64" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col19" translation="0.872164 0 -0.872184" shapeId="19" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="65" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col2" translation="0.872164 0 -0.872184" shapeId="20" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="66" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col3" translation="0.872164 0 -0.872184" shapeId="21" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="67" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col4" translation="0.872164 0 -0.872184" shapeId="22" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="68" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col5" translation="0.872164 0 -0.872184" shapeId="23" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="69" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col6" translation="0.872164 0 -0.872184" shapeId="24" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="70" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col7" translation="0.872164 0 -0.872184" shapeId="25" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="71" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col8" translation="0.872164 0 -0.872184" shapeId="26" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="72" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        <Shape name="col9" translation="0.872164 0 -0.872184" shapeId="27" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="73" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+</i3D>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<wheel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../shared/xml/schema/wheel.xsd">
+    <metadata brand="VREDESTEIN" name="ENDURION TRAILER" category="TRAILER" />
+    <default>
+        <physics radius="0.56" visualOffset="0.005" width="0.56" mass="0.173" tireType="mud" frictionScale="1.60" maxLongStiffness="10.5" maxLatStiffness="125" maxLatStiffnessLoad="2" />
+        <tire filename="vehicles/EWR150E/shared/wheels/tires/600_50R22_5.i3d" nodeLeft="0|0" nodeRight="0|0" maxDeformation="0.0653" tireTrackAtlasIndex="24" hasMudMesh="true" />
+        <outerRim filename="vehicles/EWR150E/shared/wheels/rims/ewr150eRimDualTires.i3d" node="0|0" widthAndDiam="32 39" />
+        <innerRim filename="vehicles/EWR150E/shared/wheels/rims/ewr150eRimDualTires.i3d" nodeLeft="0|0" nodeRight="0|0" widthAndDiam="32 39" />
+    </default>
+</wheel>

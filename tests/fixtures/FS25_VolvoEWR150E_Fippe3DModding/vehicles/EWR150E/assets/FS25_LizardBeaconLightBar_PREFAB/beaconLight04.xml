@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<beaconLight xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/beaconLight.xsd">
+    <filename>vehicles/EWR150E/assets/FS25_LizardBeaconLightBar_PREFAB/beaconLight04.i3d</filename>
+
+    <rootNode node="beaconLight04" />
+
+    <variations>
+        <variation name="ROTATE" rootNode="variationRotate">
+            <staticLight node="variationRotate_static" intensity="100"/>
+            <staticLight node="variationRotateDistance_static" intensity="50" minDistance="15"/>
+            <rotator node="variationRotate" speed="0.015" />
+            <realLight node="variationRotate_realLight" />
+            <device mode="ROTATE_RIGHT" rpm="200" numLEDScale="0.4" brightnessScale="1" />
+        </variation>
+        <variation name="BLINK" rootNode="variationBlink">
+            <staticLight node="variationBlink_static" intensity="1" multiBlink="true">
+                <intensityScale minDistance="3" minIntensity="200" maxDistance="15" maxIntensity="500"/>
+            </staticLight>
+            <staticLight node="variationBlinkDistance_static" intensity="1" multiBlink="true" minDistance="10">
+                <intensityScale minDistance="10" minIntensity="1" maxDistance="30" maxIntensity="50"/>
+            </staticLight>
+            <realLight node="variationBlink_realLight" />
+            <device mode="DOUBLE_BLINK_TRIPLE_WAIT" rpm="100" numLEDScale="1" brightnessScale="1" />
+        </variation>
+    </variations>
+
+    <i3dMappings>
+        <i3dMapping id="beaconLight04" node="0>" />
+        <i3dMapping id="surfaceMount" node="0>0" />
+        <i3dMapping id="poleMount" node="0>1" />
+        <i3dMapping id="variationRotate" node="0>2" />
+        <i3dMapping id="variationRotate_static" node="0>2|0" />
+        <i3dMapping id="variationRotate_realLight" node="0>2|1" />
+        <i3dMapping id="variationRotateDistance_static" node="0>2|2" />
+        <i3dMapping id="variationBlink" node="0>3" />
+        <i3dMapping id="variationBlink_static" node="0>3|0" />
+        <i3dMapping id="variationBlink_realLight" node="0>3|1" />
+        <i3dMapping id="variationBlinkDistance_static" node="0>3|2" />
+    </i3dMappings>
+</beaconLight>

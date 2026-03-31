@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="iso-8859-1"?>
+<i3D name="Gitter.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+    <Asset>
+        <Export program="GIANTS Editor 64bit" version="10.0.4"/>
+    </Asset>
+    <Files>
+        <File fileId="2" filename="../Texturen/gen_wear_dirt_2.dds"/>
+        <File fileId="3" filename="GitterShader.xml"/>
+    </Files>
+    <Materials>
+        <Material name="cage" materialId="20" diffuseColor="0.02 0.02 0.02 1" customShaderId="3" customShaderVariation="colorMask">
+            <Glossmap fileId="2"/>
+            <CustomParameter name="colorMat0" value="0.02 0.02 0.02 1"/>
+            <CustomParameter name="colorMat1" value="1 1 1 8"/>
+            <CustomParameter name="colorMat2" value="0 0 0 4"/>
+            <CustomParameter name="colorMat3" value="0 0 0 4"/>
+        </Material>
+        <Material name="glxnn5h_mat" materialId="38" diffuseColor="0.0156863 0.0156863 0.0156863 1" specularColor="0.8 1 0.2"/>
+    </Materials>
+    <Shapes externalShapesFile="Gitter.i3d.shapes"/>
+    <Scene>
+        <TransformGroup name="Gitter" translation="-1.29634 0.156758 -2.32101" nodeId="949">
+            <Shape name="Circle.002" translation="0 0 0.057882" shapeId="1" nodeId="950" castsShadows="true" receiveShadows="true" materialIds="20"/>
+            <Shape name="Circle.004" shapeId="2" nodeId="951" castsShadows="true" receiveShadows="true" materialIds="20">
+                <Shape name="cube" translation="0.973656 3.13574 -0.468288" scale="0.921 0.134 0.1" shapeId="3" nodeId="952" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="38"/>
+            </Shape>
+            <Shape name="Cube.004" translation="0 0 0.057882" shapeId="4" nodeId="953" castsShadows="true" receiveShadows="true" materialIds="20"/>
+            <TransformGroup name="IC_Gitter�" translation="1.46056 2.01753 1.35297" nodeId="922"/>
+        </TransformGroup>
+    </Scene>
+</i3D>

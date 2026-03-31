@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="beaconLight04.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="12" filename="$data/shared/assets/beaconLights/lizard/beaconLight04_emissive.png"/>
+    <File fileId="2" filename="$data/shared/assets/beaconLights/lizard/beaconLight04_normal.png"/>
+    <File fileId="3" filename="$data/shared/assets/beaconLights/lizard/beaconLight04_vmask.png"/>
+    <File fileId="19" filename="$data/shared/assets/beaconLights/lizard/beaconLightLOD_emissive.png"/>
+    <File fileId="17" filename="$data/shared/clearPlastic_diffuse.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="16" filename="$data/shared/detailLibrary/metallic/clear_diffuse.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/metallic/clear_specular.png"/>
+    <File fileId="18" filename="$data/shared/detailLibrary/metallic/glass/glassClear03_specular.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/metallic/silverScratched_diffuse.png"/>
+    <File fileId="13" filename="$data/shared/detailLibrary/metallic/silverScratched_specular.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.png"/>
+    <File fileId="1" filename="$data/shared/white_diffuse.png"/>
+    <File fileId="20" filename="texture/beaconLight04_normal.dds"/>
+    <File fileId="21" filename="texture/beaconLight04_vmask.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="clearGlass_glassClear03_mat" materialId="109" alphaBlending="true" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="17"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="18"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+      <CustomParameter name="colorScale" value="1 0.25 0"/>
+      <CustomParameter name="alphaBlendingClipThreshold" value="0"/>
+    </Material>
+    <Material name="clearGlass_glassClear03_mat1" materialId="96" alphaBlending="true" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="17"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="18"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="19"/>
+      <CustomParameter name="colorScale" value="1 0.25 0"/>
+      <CustomParameter name="alphaBlendingClipThreshold" value="0"/>
+    </Material>
+    <Material name="clearGlass_glassClear03_mat1" materialId="6" alphaBlending="true" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="17"/>
+      <Normalmap fileId="20"/>
+      <Glossmap fileId="21"/>
+      <Custommap name="detailSpecular" fileId="18"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="19"/>
+      <CustomParameter name="colorScale" value="1 0.25 0"/>
+      <CustomParameter name="alphaBlendingClipThreshold" value="0"/>
+    </Material>
+    <Material name="white_chrome_mat" materialId="7" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="15"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+    </Material>
+    <Material name="white_chrome_mat1" materialId="83" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="15"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+      <CustomParameter name="colorScale" value="1 0.25 0"/>
+    </Material>
+    <Material name="white_chrome_mat1" materialId="8" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="1"/>
+      <Normalmap fileId="20"/>
+      <Glossmap fileId="21"/>
+      <Custommap name="detailSpecular" fileId="15"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+      <CustomParameter name="colorScale" value="1 0.25 0"/>
+    </Material>
+    <Material name="white_plasticPaintedBlack_mat" materialId="9" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="5"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="7"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+    </Material>
+    <Material name="white_silverScratched_mat" materialId="11" customShaderId="4" customShaderVariation="staticLight">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="13"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <Custommap name="lightsIntensity" fileId="12"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="beaconLight04.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="beaconLight04" nodeId="20">
+      <Shape name="surfaceMount" shapeId="1" visibility="false" clipDistance="75" nodeId="21" castsShadows="true" receiveShadows="true" materialIds="9"/>
+      <Shape name="poleMount" shapeId="2" visibility="false" clipDistance="75" nodeId="22" castsShadows="true" receiveShadows="true" materialIds="9,11"/>
+      <TransformGroup name="variationRotate" nodeId="23">
+        <Shape name="variationRotate_static" translation="0 0.001327 0" shapeId="3" clipDistance="75" nodeId="24" castsShadows="true" receiveShadows="true" materialIds="83,7"/>
+        <Light name="variationRotate_realLight" translation="0 0.096328 0.079649" rotation="151.663 0 0" clipDistance="300" nodeId="25" type="spot" color="1 0.423083 0" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.02" depthMapResolution="256" shadowFarDistance="80" shadowExtrusionDistance="200" softShadowsLightSize="0.05" softShadowsLightDistance="15" softShadowsDepthBiasFactor="5" softShadowsMaxPenumbraSize="0.5" range="12" coneAngle="100" dropOff="5"/>
+        <Shape name="variationRotateDistance_static" shapeId="4" visibility="false" clipDistance="75" nodeId="26" castsShadows="true" receiveShadows="true" materialIds="96"/>
+      </TransformGroup>
+      <TransformGroup name="variationBlink" visibility="false" nodeId="27">
+        <Shape name="variationBlink_static" shapeId="5" clipDistance="75" nodeId="28" castsShadows="true" receiveShadows="true" materialIds="8,9,7"/>
+        <Light name="variationBlink_realLight" translation="0 0.086327 0.080244" rotation="150 0 0" clipDistance="300" nodeId="29" type="spot" color="1 0.423083 0" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.02" depthMapResolution="256" shadowFarDistance="80" shadowExtrusionDistance="200" softShadowsLightSize="0.05" softShadowsLightDistance="15" softShadowsDepthBiasFactor="5" softShadowsMaxPenumbraSize="0.5" range="12" coneAngle="100" dropOff="5">
+          <Light name="variationBlink_realLight1" translation="-0.070964 -0.058695 0.101663" rotation="-104.812 -45.1866 -35.5296" clipDistance="300" nodeId="30" type="spot" color="1 0.423083 0" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.02" depthMapResolution="256" shadowFarDistance="80" shadowExtrusionDistance="200" softShadowsLightSize="0.05" softShadowsLightDistance="15" softShadowsDepthBiasFactor="5" softShadowsMaxPenumbraSize="0.5" range="12" coneAngle="100" dropOff="5"/>
+          <Light name="variationBlink_realLight2" translation="0.071163 -0.05841 0.101169" rotation="-104.812 45.1866 35.5296" clipDistance="300" nodeId="31" type="spot" color="1 0.423083 0" emitDiffuse="true" emitSpecular="true" castShadowMap="true" depthMapBias="0.001" depthMapSlopeScaleBias="2" depthMapSlopeClamp="0.02" depthMapResolution="256" shadowFarDistance="80" shadowExtrusionDistance="200" softShadowsLightSize="0.05" softShadowsLightDistance="15" softShadowsDepthBiasFactor="5" softShadowsMaxPenumbraSize="0.5" range="12" coneAngle="100" dropOff="5"/>
+        </Light>
+        <Shape name="variationBlinkDistance_static" shapeId="6" clipDistance="75" nodeId="32" castsShadows="true" receiveShadows="true" materialIds="6"/>
+      </TransformGroup>
+      <Shape name="lightGlass_static" shapeId="7" visibility="false" clipDistance="75" nodeId="33" castsShadows="true" receiveShadows="true" materialIds="109"/>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

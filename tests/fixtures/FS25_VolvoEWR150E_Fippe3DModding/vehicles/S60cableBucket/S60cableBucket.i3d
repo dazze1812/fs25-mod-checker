@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="S60cableBucket.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="13" filename="$data/shaders/decalShader.xml"/>
+    <File fileId="10" filename="$data/shared/default_normal.dds"/>
+    <File fileId="12" filename="../../assets/decals.dds"/>
+    <File fileId="4" filename="../../assets/gen_wear_dirt_2.dds"/>
+    <File fileId="3" filename="cableBucket_normal.png"/>
+    <File fileId="5" filename="vehicleShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="cableMat" materialId="5" diffuseColor="0.00392157 0.00392157 0.00392157 1" customShaderId="5" customShaderVariation="colorMask">
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+      <CustomParameter name="colorMat0" value="0.03 0.03 0.03 0"/>
+    </Material>
+    <Material name="decalsPNG" materialId="6" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="13">
+      <Texture fileId="12"/>
+    </Material>
+    <Material name="default" materialId="7" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="effectMesh_mat" materialId="8" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0">
+      <Normalmap fileId="10"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="S60cableBucket.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="cableBucket_main_component1" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="300" nodeId="27" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7">
+      <Shape name="cableBucket" rotation="92.54 90 0" scale="0.801284 0.801285 0.801285" shapeId="2" nodeId="28" castsShadows="true" receiveShadows="true" materialIds="5">
+        <TransformGroup name="attacherJoint" translation="0.908321 -0.0526307 -1.1864" rotation="90 -67.9055 180" nodeId="29"/>
+        <TransformGroup name="effects" translation="-9.08931e-15 2.47243e-09 5.57349e-08" rotation="-90 2.54 89.9999" scale="1.248 1.248 1.248" nodeId="30">
+          <Shape name="emitterShape" translation="5.94789e-17 0.267869 -0.246525" rotation="-6.83019e-06 -0 0" shapeId="3" clipDistance="300" nodeId="31" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+          <Shape name="grainEffect" translation="-4.17233e-07 0.12306 -0.0438689" rotation="-6.83019e-06 -0 0" scale="0.253018 1 1" shapeId="4" visibility="false" nodeId="32" castsShadows="true" receiveShadows="true" materialIds="8"/>
+          <Shape name="smokeEffect" translation="-1.65597e-17 0.173169 0.250845" rotation="-6.83019e-06 -0 0" shapeId="5" visibility="false" nodeId="33" castsShadows="true" receiveShadows="true" materialIds="8"/>
+        </TransformGroup>
+        <TransformGroup name="fillUnit" translation="-9.08931e-15 2.47243e-09 5.57349e-08" rotation="-90 2.54 89.9999" scale="1.248 1.248 1.248" nodeId="34">
+          <TransformGroup name="dischargeNode" translation="1.94427e-16 0.875538 -0.396679" rotation="-6.83019e-06 -0 0" nodeId="35"/>
+          <Shape name="exactFillRootNode" translation="5.96046e-09 0.351119 -0.743463" rotation="-6.83019e-06 -0 0" shapeId="6" visibility="false" kinematic="true" compound="true" collisionFilterGroup="0x40000000" collisionFilterMask="0x40000000" nodeId="36" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+          <Shape name="fillVolume" translation="1.85273e-06 0.180249 -1.11439" rotation="49.2977 -9.55333e-05 0" shapeId="7" clipDistance="300" nodeId="37" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+          <TransformGroup name="fillVolumeLoadNode" translation="9.85445e-18 0.0443805 0.0407326" rotation="-6.83019e-06 -0 0" nodeId="38"/>
+          <TransformGroup name="fillVolumeUnloadNode" translation="1.94427e-16 0.875538 -0.396679" rotation="-6.83019e-06 -0 0" nodeId="39"/>
+          <TransformGroup name="levelerNode" translation="0 1.31134e-08 0.3" rotation="-6.83019e-06 -0 0" nodeId="40"/>
+          <TransformGroup name="shovelNode" translation="0 1.31134e-08 0.3" rotation="-6.83019e-06 -0 0" nodeId="41"/>
+        </TransformGroup>
+        <TransformGroup name="visuals" translation="-9.08931e-15 2.47243e-09 5.57349e-08" rotation="-90 2.54 89.9999" scale="1.248 1.248 1.248" nodeId="42">
+          <Shape name="cableBucketDecals" translation="0 4.47035e-08 8.7041e-15" rotation="89.9999 -9.56181e-05 -1.17394e-05" shapeId="8" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="6"/>
+        </TransformGroup>
+      </Shape>
+      <TransformGroup name="zCollisions" nodeId="44">
+        <Shape name="colPart1" shapeId="9" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="45" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart2" shapeId="10" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="46" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart3" shapeId="11" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="47" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart4" shapeId="12" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="48" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart5" shapeId="13" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="49" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart6" shapeId="14" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="50" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart7" shapeId="15" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="51" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart8" shapeId="16" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="52" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+        <Shape name="colPart9" shapeId="17" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="53" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="7"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+</i3D>

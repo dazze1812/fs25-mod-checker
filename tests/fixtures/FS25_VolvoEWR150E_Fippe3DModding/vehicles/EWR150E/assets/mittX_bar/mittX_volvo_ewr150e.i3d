@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="mittX_volvo_ewr150e.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="3" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="2" filename="$data/shared/default_specular.dds"/>
+    <File fileId="21" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_diffuse.png"/>
+    <File fileId="20" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_normal.png"/>
+    <File fileId="19" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_specular.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="16" filename="$data/shared/detailLibrary/metallic/clear_diffuse.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/metallic/clear_specular.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/metallic/silverScratched_diffuse.png"/>
+    <File fileId="4" filename="$data/shared/detailLibrary/metallic/silverScratched_specular.png"/>
+    <File fileId="23" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.png"/>
+    <File fileId="22" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.png"/>
+    <File fileId="13" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubberBlack_diffuse.png"/>
+    <File fileId="12" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_normal.png"/>
+    <File fileId="11" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_specular.png"/>
+    <File fileId="1" filename="$data/shared/white_diffuse.dds"/>
+    <File fileId="17" filename="$data/shared/window02_diffuse.dds"/>
+    <File fileId="18" filename="$data/shared/window_specular.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="mittXattacher_silverScratched_mat" materialId="5" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.63 0.63 0.63"/>
+      <CustomParameter name="smoothnessScale" value="0.4"/>
+    </Material>
+    <Material name="mittXbolt_chrome_mat" materialId="6" emissiveColor="0 0 0 1" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="15"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="16"/>
+      <CustomParameter name="colorScale" value="0.7 0.7 0.7"/>
+    </Material>
+    <Material name="mittXroofBar_silverScratched_mat" materialId="7" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.61 0.61 0.61"/>
+      <CustomParameter name="smoothnessScale" value="0.4"/>
+    </Material>
+    <Material name="mittXsideBar_counterweightBar_mat" materialId="8" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.62 0.62 0.62"/>
+      <CustomParameter name="smoothnessScale" value="0.4"/>
+    </Material>
+    <Material name="mittXsideBar_plasticPaintedBlack_mat" materialId="9" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="22"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="23"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+    </Material>
+    <Material name="mittXsideBar_silverScratched_mat" materialId="10" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.64 0.64 0.64"/>
+      <CustomParameter name="smoothnessScale" value="0.4"/>
+    </Material>
+    <Material name="mittXsinvisor_rubberBlackHoses_mat" materialId="11" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="11"/>
+      <Custommap name="detailNormal" fileId="12"/>
+      <Custommap name="detailDiffuse" fileId="13"/>
+      <CustomParameter name="colorScale" value="0.01 0.01 0.01"/>
+      <CustomParameter name="porosity" value="0.5"/>
+    </Material>
+    <Material name="mittXsunvisor_AGROMASZ_GREENPAINT_mat" materialId="12" alphaBlending="true" customShaderId="3">
+      <Texture fileId="17"/>
+      <Glossmap fileId="18"/>
+      <Custommap name="detailSpecular" fileId="19"/>
+      <Custommap name="detailNormal" fileId="20"/>
+      <Custommap name="detailDiffuse" fileId="21"/>
+      <CustomParameter name="colorScale" value="0 0.3114 0.0769"/>
+      <CustomParameter name="smoothnessScale" value="0.85"/>
+      <CustomParameter name="clearCoatIntensity" value="0.1"/>
+      <CustomParameter name="clearCoatSmoothness" value="0.2"/>
+    </Material>
+    <Material name="mittXworkingLightAttacher_silverScratched_mat" materialId="13" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.59 0.59 0.59"/>
+      <CustomParameter name="smoothnessScale" value="0.4"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="mittX_volvo_ewr150e.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="mittX_roofBar" nodeId="22">
+      <Shape name="mittX_roofBar" translation="0.748074 3.40032 1.25182" rotation="90 85.8079 90" shapeId="1" clipDistance="400" nodeId="23" castsShadows="true" receiveShadows="true" materialIds="7,11,6,12,5">
+        <Shape name="lightHolder_roofBar_01" translation="-0.00279164 0.000315584 -0.185047" rotation="162.051 90 0" shapeId="2" clipDistance="400" nodeId="24" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightRoofBar01" translation="1.78814e-07 0.0226143 0.0615246" rotation="-157.858 -5.27969e-06 7.19188e-06" nodeId="25"/>
+        </Shape>
+        <Shape name="lightHolder_roofBar_02" translation="-0.00279164 0.000315584 -0.0600473" rotation="162.051 90 0" shapeId="2" clipDistance="400" nodeId="26" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightRoofBar02" translation="1.78814e-07 0.0226143 0.0615246" rotation="0.0760781 6.40124e-07 -180" nodeId="27"/>
+        </Shape>
+        <Shape name="lightHolder_roofBar_03" translation="-0.00279164 0.000315584 0.0649527" rotation="162.051 90 0" shapeId="2" clipDistance="400" nodeId="28" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightRoofBar03" translation="1.78814e-07 0.0226143 0.0615246" rotation="0.0760781 6.40124e-07 -180" nodeId="29"/>
+        </Shape>
+        <Shape name="lightHolder_roofBar_04" translation="-0.00279164 0.000315584 0.189953" rotation="162.051 90 0" shapeId="2" clipDistance="400" nodeId="30" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightRoofBar04" translation="1.78814e-07 0.0226142 0.0615246" rotation="0.0760781 6.40124e-07 -180" nodeId="31"/>
+        </Shape>
+        <Shape name="lightHolder_roofBar_05" translation="1.44741 0.0507047 0.470882" rotation="-7 180 -16" shapeId="2" clipDistance="400" nodeId="32" castsShadows="true" receiveShadows="true" materialIds="10">
+          <TransformGroup name="workingLightRoofBar05" translation="0.000562504 0.0363328 0.0611379" rotation="-12.8775 90.8978 -13.1724" nodeId="33"/>
+        </Shape>
+        <Shape name="lightHolder_roofBar_06" translation="1.5936 0.0112493 0.0514311" rotation="-5 -90 0" shapeId="2" clipDistance="400" nodeId="34" castsShadows="true" receiveShadows="true" materialIds="10">
+          <TransformGroup name="workingLightRoofBar06" translation="-1.78814e-07 0.0359522 0.0605665" rotation="0.807847 6.72861e-09 -2.86254e-11" nodeId="35"/>
+        </Shape>
+        <Shape name="workingLightRoofBarElectricCables" translation="0.0125523 0.00495017 5.96046e-08" rotation="-4.19215 -90 0" shapeId="3" nodeId="36" castsShadows="false" receiveShadows="false" materialIds="11"/>
+      </Shape>
+    </TransformGroup>
+    <TransformGroup name="mittX_counterweightBar" nodeId="37">
+      <Shape name="mittX_counterweightBar" translation="0.000151947 2.8903 -1.8773" rotation="-0 90 0" shapeId="4" clipDistance="400" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="8,5,6">
+        <Shape name="lightHolder_counterweight_01" translation="-0.0736725 -0.090857 0.456549" rotation="-4.5 -107.977 2.58637e-07" shapeId="2" clipDistance="400" nodeId="39" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightCounterweightBar01" translation="-1.5229e-05 0.0364634 0.0623304" rotation="-8.53774e-07 -0.02283 -0.00179595" nodeId="40"/>
+        </Shape>
+        <Shape name="lightHolder_counterweight_02" translation="-0.0736724 -0.0908575 -0.456549" rotation="-4.5 -107.977 2.58636e-07" shapeId="5" clipDistance="400" nodeId="41" castsShadows="true" receiveShadows="true" materialIds="13">
+          <TransformGroup name="workingLightCounterweightBar02" translation="0.0345272 0.0373434 0.0511571" rotation="1.05469 35.849 3.25982" nodeId="42"/>
+        </Shape>
+      </Shape>
+      <Shape name="workingLightCounterweightBarElectricCables" translation="0 2.89708 -1.73258" rotation="-0 90 0" shapeId="6" clipDistance="300" nodeId="43" castsShadows="false" receiveShadows="false" materialIds="11"/>
+    </TransformGroup>
+    <TransformGroup name="mittX_sideBar" nodeId="44">
+      <Shape name="mittX_sideBar" translation="-5.20945e-05 1.70481 -0.368601" rotation="-0 -180 -0" shapeId="7" clipDistance="400" nodeId="45" castsShadows="true" receiveShadows="true" materialIds="10,9"/>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

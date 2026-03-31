@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="sideStep_VolvoEWR150E.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="3" filename="$data/shared/default_specular.dds"/>
+    <File fileId="13" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/metallic/metalGalvanized_diffuse.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/metallic/metalGalvanized_normal.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/metallic/metalGalvanized_specular.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/metallic/silverScratched_diffuse.png"/>
+    <File fileId="12" filename="$data/shared/detailLibrary/metallic/silverScratched_specular.png"/>
+    <File fileId="1" filename="$data/shared/white_diffuse.dds"/>
+    <File fileId="2" filename="../../textures/sideStep_VolvoEWR150E_normals.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="i3d_default_material" materialId="5" diffuseColor="0.8 0.8 0.8 1" specularColor="0.6 1 0">
+    </Material>
+    <Material name="screw_silverScratched_mat" materialId="6" customShaderId="4">
+      <Texture fileId="1"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="12"/>
+      <Custommap name="detailNormal" fileId="13"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+    </Material>
+    <Material name="sideStep_metalGalvanized_mat" materialId="18" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="5"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="7"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="sideStep_VolvoEWR150E.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="sideStep_VolvoEWR150E" translation="1.25724 1.70209 0.778785" shapeId="1" clipDistance="400" nodeId="11" castsShadows="false" receiveShadows="false" materialIds="18,6">
+      <Shape name="col_sideStep" translation="0.113796 0.0093739 0" shapeId="2" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" nodeId="12" castsShadows="false" receiveShadows="false" nonRenderable="true" materialIds="5"/>
+    </Shape>
+  </Scene>
+
+</i3D>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="leveler" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs22/vehicle.xsd">
+    <annotation>Copyright (C) North Modding Company AB, All Rights Reserved.</annotation>
+
+    <storeData>
+        <name>S60 Leveling Beam</name>
+		<functions>
+            <function>$l10n_function_leveler</function>
+        </functions>
+        <image>vehicles/S60levelingBeam/store_levelingBeam.dds</image>
+        <price>4500</price>
+        <lifetime>600</lifetime>
+        <rotation>0</rotation>
+        <brand>ENGCON</brand>
+        <category>forestryExcavatorTools</category>
+		<shopTranslationOffset>0 0.007397 -0.001347</shopTranslationOffset>
+        <shopRotationOffset>0.54778 0 0</shopRotationOffset>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_leveler</typeDesc>
+        <filename>vehicles/S60levelingBeam/S60levelingBeam.i3d</filename>
+        <size width="3" length="1.5" height="1" lengthOffset="0.14"/>
+        <components>
+            <component centerOfMass="0 0.3 0.1" solverIterationCount="20" mass="550" />
+        </components>
+        <schemaOverlay attacherJointPosition="0 0" name="IMPLEMENT" />
+        <mapHotspot type="TOOL" />
+    </base>
+
+    <wheels>
+        <wheelConfigurations>
+            <wheelConfiguration name="$l10n_configuration_valueDefault" price="0">
+                <wheels>
+                    <wheel>
+                        <physics rotSpeed="0" restLoad="0.4" repr="rollerPhy" driveNode="roller" radius="0.15" width="1.15" forcePointRatio="0.2" initialCompression="20" suspTravel="0.01" spring="30" damper="15"/>
+                    </wheel>
+                </wheels>
+            </wheelConfiguration>
+        </wheelConfigurations>
+    </wheels>
+
+    <attachable>
+	<inputAttacherJoints>
+         <inputAttacherJoint node="attacherJointS70" jointType="wheelLoader">
+			    <subType name="S60" showWarning="false"/>
+            </inputAttacherJoint>
+	</inputAttacherJoints>
+    </attachable>
+
+    <fillUnit>
+        <fillUnitConfigurations>
+            <fillUnitConfiguration>
+                <fillUnits>
+                    <fillUnit unitTextOverride="$l10n_unit_literShort" fillTypeCategories="bulk windrow" capacity="5000" showInShop="false" showOnHud="false"/>
+                </fillUnits>
+            </fillUnitConfiguration>
+        </fillUnitConfigurations>
+    </fillUnit>
+
+    <leveler fillUnitIndex="1" maxFillLevelPerMS="40">
+        <levelerNode node="levelerNode" width="2.5" zOffset="0.25" minDropWidth="2.4" maxDropWidth="3.6" minDropDirOffset="1" maxDropDirOffset="1.5">
+            <smoothing allowed="true" radius="0.5" overlap="1.7" />
+
+            <occlusionAreas>
+                <occlusionArea startNode="occlustionArea01Start" widthNode="occlustionArea01Width" heightNode="occlustionArea01Height"/>
+            </occlusionAreas>
+        </levelerNode>
+
+        <force node="levelingBeam_main_component1" maxForce="50" direction="1" />
+
+        <pickUpDirection>1</pickUpDirection>
+
+        <effects>
+            <effectNode effectNode="levelingBeamEffectNode" effectClass="LevelerEffect" materialType="leveler" fadeTime="0.5" speed="1" maxHeight="0.4" scale="1.1 1.2 1.2"/>
+        </effects>
+    </leveler>
+
+    <ai>
+        <agentAttachment width="2.65" height="0.52" length="1.26" lengthOffset="0.145"/>
+    </ai>
+
+    <foliageBending>
+        <bendingNode minX="-1.325" maxX="1.325" minZ="-0.484" maxZ="0.774" yOffset="0.1" />
+    </foliageBending>
+
+    <wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
+    <washable dirtDuration="90" washDuration="1" workMultiplier="6" fieldMultiplier="2"/>
+
+    <i3dMappings>
+        <i3dMapping id="levelingBeam_main_component1" node="0>" />
+        <i3dMapping id="levelingBeam_vis" node="0>0" />
+		<i3dMapping id="attacherJointS70" node="0>0|0" />
+        <i3dMapping id="levelingBeamEffectNode" node="0>0|1|0" />
+        <i3dMapping id="levelerNode" node="0>0|2" />
+        <i3dMapping id="occlustionArea01Height" node="0>0|4" />
+        <i3dMapping id="occlustionArea01Start" node="0>0|5" />
+        <i3dMapping id="occlustionArea01Width" node="0>0|6" />
+        <i3dMapping id="rollerPhy" node="0>0|7|0" />
+        <i3dMapping id="roller" node="0>0|7|0|0" />
+    </i3dMappings>
+</vehicle>

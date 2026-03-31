@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="gradingBucket1300S70" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="9.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="13" filename="$data/shaders/decalShader.xml"/>
+    <File fileId="5" filename="vehicleShader.xml"/>
+    <File fileId="10" filename="$data/shared/default_normal.dds"/>
+    <File fileId="12" filename="../../assets/decals.dds"/>
+    <File fileId="4" filename="../../assets/gen_wear_dirt_2.dds"/>
+    <File fileId="3" filename="rockBucket_normal.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="decalsPNG" materialId="4" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="13">
+      <Texture fileId="12"/>
+      <CustomParameter name="placeableColorScale" value="0 1 0 0"/>
+    </Material>
+    <Material name="default" materialId="5" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="effectMesh_mat" materialId="6" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0">
+      <Normalmap fileId="10"/>
+    </Material>
+    <Material name="rockBucketMat" materialId="7" diffuseColor="0.00392157 0.00392157 0.00392157 1" customShaderId="5" customShaderVariation="colorMask">
+      <Normalmap fileId="3"/>
+      <Glossmap fileId="4"/>
+      <CustomParameter name="RDT" value="0 0 0 0"/>
+      <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
+      <CustomParameter name="colorMat0" value="0.03 0.03 0.03 0"/>
+      <CustomParameter name="colorMat1" value="0.7 0.4 0 0"/>
+      <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
+      <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
+      <CustomParameter name="colorMat4" value="1 1 0.1 1"/>
+      <CustomParameter name="colorMat5" value="0.05 0.05 0.05 1"/>
+      <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
+      <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="S60rockBucket.i3d.shapes">
+  </Shapes>
+
+
+  <Dynamics>
+  </Dynamics>
+
+  <Scene>
+      <Shape shapeId="1" name="rockBucket_main_component1" translation="-7.53999e-05 0 0" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="300" nodeId="29" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true">
+        <Shape shapeId="2" name="diggingBucketTeeth" rotation="-0 90 0" nodeId="30" materialIds="7" castsShadows="true" receiveShadows="true">
+          <TransformGroup name="attacherJoint" translation="0.811 1.04266 -8.87594e-08" rotation="0 0 -120" nodeId="31"/>
+          <TransformGroup name="effects" translation="-6.59895e-12 -4.47035e-08 7.53999e-05" rotation="-9.9324e-07 -90 0" nodeId="32">
+            <Shape shapeId="3" name="emitterShape" translation="5.94789e-17 0.267869 -0.246525" rotation="-6.83019e-06 -0 0" clipDistance="300" nodeId="33" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+            <Shape shapeId="4" name="grainEffect" translation="-4.17233e-07 0.12306 -0.0438689" rotation="-6.83019e-06 -0 0" scale="0.422643 1 1" visibility="false" nodeId="34" materialIds="6" castsShadows="true" receiveShadows="true"/>
+            <Shape shapeId="5" name="smokeEffect" translation="-1.65597e-17 0.173169 0.250845" rotation="-6.83019e-06 -0 0" visibility="false" nodeId="35" materialIds="6" castsShadows="true" receiveShadows="true"/>
+          </TransformGroup>
+          <TransformGroup name="fillUnit" translation="-6.59895e-12 -4.47035e-08 7.53999e-05" rotation="-9.9324e-07 -90 0" nodeId="36">
+            <TransformGroup name="dischargeNode" translation="1.94427e-16 0.875538 -0.396679" rotation="-6.83019e-06 -0 0" nodeId="37"/>
+            <Shape shapeId="6" name="exactFillRootNode" translation="5.96046e-09 0.351119 -0.743463" rotation="-6.83019e-06 -0 0" visibility="false" kinematic="true" compound="true" collisionMask="1073741824" nodeId="38" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+            <Shape shapeId="7" name="fillVolumeRock" translation="0.0149264 0.188734 -1.157" rotation="49.2977 -9.55333e-05 2.13442e-06" clipDistance="300" nodeId="39" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+            <TransformGroup name="fillVolumeLoadNode" translation="9.85445e-18 0.0443805 0.0407326" rotation="-6.83019e-06 -0 0" nodeId="40"/>
+            <TransformGroup name="fillVolumeUnloadNode" translation="1.94427e-16 0.875538 -0.396679" rotation="-6.83019e-06 -0 0" nodeId="41"/>
+            <TransformGroup name="levelerNode" translation="0 1.31134e-08 0.3" rotation="-6.83019e-06 -0 0" nodeId="42"/>
+            <TransformGroup name="shovelNode" translation="0 1.31134e-08 0.3" rotation="-6.83019e-06 -0 0" nodeId="43"/>
+          </TransformGroup>
+          <TransformGroup name="visuals" translation="-6.59895e-12 -4.47035e-08 7.53999e-05" rotation="-9.9324e-07 -90 0" nodeId="44">
+            <Shape shapeId="8" name="rockDecals" translation="1.31135e-06 0.351812 -0.771062" rotation="90 -9.55333e-05 2.13442e-06" nodeId="45" materialIds="4" castsShadows="true" receiveShadows="true"/>
+          </TransformGroup>
+        </Shape>
+        <TransformGroup name="rockCollisions" nodeId="46">
+          <Shape shapeId="9" name="rockCol1" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="47" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="10" name="rockCol2" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="48" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="11" name="rockCol3" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="49" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="12" name="rockCol4" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="50" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="13" name="rockCol5" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="51" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="14" name="rockCol6" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="52" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="15" name="rockCol7" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="53" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="16" name="rockCol8" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="54" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="17" name="toothCol1" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="55" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="18" name="toothCol2" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="56" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="19" name="toothCol3" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="57" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+          <Shape shapeId="20" name="toothCol4" visibility="false" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="0.001" nodeId="58" materialIds="5" castsShadows="true" receiveShadows="true" nonRenderable="true"/>
+        </TransformGroup>
+      </Shape>
+  </Scene>
+
+</i3D>

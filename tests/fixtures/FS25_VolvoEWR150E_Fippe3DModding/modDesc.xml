@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/NMC-TBone/xml-schema/main/modDesc.xsd">
+	<author>KingNo, Virion(fmods)</author> <!-- 95% new excavator model by FippeM123(Fippe3DModding). FippeM123 NOT taking all cread of the mod, "KingNo, Virion(fmods) and t-Bone" are still the main persones -->
+    <version>2.0.0.0</version>
+    <title>
+        <en>Volvo EWR150E 2.0</en>
+		<de>Volvo EWR150E 2.0</de>
+		<fr>Volvo EWR150E 2.0</fr>
+		<sv>Volvo EWR150E 2.0</sv>
+    </title>
+<description>
+<en><![CDATA[
+The Volvo EWR150E is a smooth and powerful wheeled excavator in the 15-ton class, designed to work efficiently in tight spaces. It features a short swing radius, fast road travel, and highly responsive hydraulics, making it ideal for everything from excavation and pipe laying to curbstone work, fine grading, and material handling.
+With the right attachments – such as buckets, grapples, breakers, and a tiltrotator – it becomes a truly versatile machine that can be used almost anywhere. Simply put: the EWR150E is a modern, flexible, and powerful excavator suitable for most types of construction work.
+
+Category
+Excavator: Forestry - Excavators
+SteelWrist X20: Forestry -  Excavator Tools
+S26 Cabel Bucket: Forestry -  Excavator Tools
+S26 Digging Bucket: Forestry -  Excavator Tools
+S26 Rock Bucket: Forestry -  Excavator Tools
+S26 Grading Bucket: Forestry -  Excavator Tools
+S26 Leveling Bucket: Forestry -  Excavator Tools
+S26 Pallet Foork: Forestry -  Excavator Tools
+
+Changelog version 2.0:
+- A completly remaked model
+- Totaly new realLights
+- New fs25 material and color system
+- Added attachments from "Virions" engcon pack
+- New mittX bars all around
+- New side step for door
+- Totaly new animations for "Interactive control"
+- New built Leica gps syetem
+]]></en>
+
+
+<de><![CDATA[
+Der Volvo EWR150E ist ein wendiger und leistungsstarker Mobilbagger in der 15-Tonnen-Klasse, der für effizientes Arbeiten auf engem Raum entwickelt wurde. Er verfügt über einen kurzen Schwenkradius, hohe Fahrgeschwindigkeit und eine äußerst feinfühlige Hydraulik, was ihn ideal für alles von Aushub- und Rohrverlegearbeiten bis hin zu Bordsteinsetzung, Feinplanierung und Materialumschlag macht.
+Mit den richtigen Anbaugeräten – wie Löffeln, Greifern, Hydraulikhämmern und Tiltrotatoren – wird er zu einer wirklich vielseitigen Maschine, die nahezu überall eingesetzt werden kann. Kurz gesagt: Der EWR150E ist ein moderner, flexibler und leistungsstarker Bagger, der sich für die meisten Arten von Bauarbeiten eignet.
+
+Kategorie
+Bagger: Forstwirtschaft – Bagger
+SteelWrist X20: Forstwirtschaft – Baggerwerkzeuge
+S26 Kabelgrabenlöffel: Forstwirtschaft – Baggerwerkzeuge
+S26 Tieflöffel: Forstwirtschaft – Baggerwerkzeuge
+S26 Felslöffel: Forstwirtschaft – Baggerwerkzeuge
+S26 Grabenräumlöffel: Forstwirtschaft – Baggerwerkzeuge
+S26 Planierlöffel: Forstwirtschaft – Baggerwerkzeuge
+S26 Palettengabel: Forstwirtschaft – Baggerwerkzeuge
+
+Changelog Version 2.0:
+- Komplett neu erstelltes Modell
+- Vollständig neue realLights
+- Neues FS25-Material- und Farbsystem
+- Anbaugeräte aus dem „Virions“ engcon-Pack hinzugefügt
+- Neue mittX-Schutzbügel rundum
+- Neue Seitentrittstufe an der Tür
+- Komplett neue Animationen für „Interactive Control“
+- Neues integriertes Leica-GPS-System
+]]></de>
+
+<fr><![CDATA[
+La Volvo EWR150E est une pelle sur pneus fluide et puissante de la classe des 15 tonnes, conçue pour travailler efficacement dans des espaces restreints. Elle dispose d’un rayon de rotation court, d’une vitesse de déplacement élevée sur route et d’une hydraulique très réactive, ce qui la rend idéale pour des travaux allant de l’excavation et de la pose de canalisations à la pose de bordures, au nivellement de précision et à la manutention de matériaux.
+Avec les bons équipements – tels que godets, grappins, brise-roches et tiltrotateurs – elle devient une machine extrêmement polyvalente pouvant être utilisée presque partout. En résumé : la EWR150E est une pelle moderne, flexible et puissante, adaptée à la plupart des travaux de construction.
+
+Catégorie
+Pelle: Foresterie – Pelles
+SteelWrist X20: Foresterie – Outils de pelle
+Godet à câbles S26: Foresterie – Outils de pelle
+Godet de fouille S26: Foresterie – Outils de pelle
+Godet roche S26: Foresterie – Outils de pelle
+Godet de curage S26: Foresterie – Outils de pelle
+Godet de nivellement S26: Foresterie – Outils de pelle
+Fourche à palettes S26: Foresterie – Outils de pelle
+
+Journal des modifications version 2.0:
+- Modèle entièrement refait
+- Nouveaux realLights entièrement retravaillés
+- Nouveau système de matériaux et de couleurs FS25
+- Ajout d’accessoires issus du pack engcon « Virions »
+- Nouvelles barres de protection mittX tout autour
+- Nouvelle marche latérale pour la porte
+- Nouvelles animations complètes pour le « contrôle interactif »
+- Nouveau système GPS Leica intégré
+]]></fr>
+</description>
+    <iconFilename>icon_EWR150E.png</iconFilename>
+	<multiplayer supported="true"/>
+    <storeItems>
+		<storeItem xmlFilename="vehicles/EWR150E/VolvoEWR150E.xml"/>
+		<storeItem xmlFilename="tiltrotatorX20/X20.xml"/>
+		<storeItem xmlFilename="vehicles/S60cableBucket/S60cableBucket.xml"/>
+		<storeItem xmlFilename="vehicles/S60diggingBucket/S60diggingBucket.xml"/>
+		<storeItem xmlFilename="vehicles/S60rockBucket/S60rockBucket.xml"/>
+		<storeItem xmlFilename="vehicles/S60gradingBucket/S60gradingBucket.xml"/>
+		<storeItem xmlFilename="vehicles/S60levelingBeam/S60levelingBeam.xml"/>
+		<storeItem xmlFilename="vehicles/S60palletForks/S60palletFork.xml"/>
+    </storeItems>
+	<vehicleTypes>
+		<type name="EWR150E" parent="baseDrivable" className="Vehicle" filename="$dataS/scripts/vehicles/Vehicle.lua">
+			<specialization name="foldable" />
+			<specialization name="powerConsumer" />
+		</type>
+		<type name="levelingBucket" parent="shovelLeveler" filename="$dataS/scripts/vehicles/Vehicle.lua">
+			<specialization name="tensionBelts" />
+		</type>
+		<type name="dynamicMountAttacherForks" parent="baseAttachable" filename="$dataS/scripts/vehicles/Vehicle.lua">
+			<specialization name="tensionBelts" />
+			<specialization name="dynamicMountAttacher" />
+		</type>
+	</vehicleTypes>
+	<l10n>
+		<text name="function_excavator">
+    		<en>Compact wheeled excavator for digging and construction.</en>
+    		<de>Kompakter Mobilbagger für Bau und Erdarbeiten.</de>
+    		<fr>Pelle sur pneus compacte pour travaux de construction.</fr>
+    		<sv>Kompakt hjulgrävare för bygg och markarbeten.</sv>
+		</text>
+		<text name="configuration_tensionBelts">
+    		<en>Tension belts</en>
+    		<de>Spanngurte</de>
+    		<fr>Sangles de tension</fr>
+    		<sv>Spännband</sv>
+		</text>
+		<text name="configuration_mittX_roof">
+    		<en>MittX Roof</en>
+    		<de>MittX Dach</de>
+    		<fr>Toit MittX</fr>
+    		<sv>MitX Tak</sv>
+		</text>
+		<text name="configuration_mittX_counterweight">
+    		<en>MittX Counterweight</en>
+    		<de>MittX Gegengewicht</de>
+    		<fr>Contrepoids MittX</fr>
+    		<sv>MitX Motvikt</sv>
+		</text>
+		<text name="configuration_mittX_sidebar">
+    		<en>MittX Sidebar</en>
+    		<de>MittX Seitenbügel</de>
+    		<fr>Arceaux latéraux MittX</fr>
+    		<sv>MitX Sidobågar</sv>
+		</text>
+		<text name="configuration_sidestep">
+    		<en>Sidestep</en>
+    		<de>Seitentritt</de>
+    		<fr>Marchepied</fr>
+    		<sv>Fotsteg</sv>
+		</text>
+		<text name="configuration_leicaGPSsystem">
+    		<en>Leica GPS system</en>
+    		<de>Leica GPS System</de>
+    		<fr>Leica GPS Système</fr>
+    		<sv>Leica GPS system</sv>
+		</text>
+		<text name="configuration_beaconLight">
+    		<en>Beacon Light</en>
+    		<de>Rundumleuchte</de>
+    		<fr>Gyrophare</fr>
+    		<sv>Saftblandare</sv>
+		</text>
+		<text name="configuration_none">
+    		<en>None</en>
+    		<de>Keine</de>
+    		<fr>Aucun</fr>
+    		<sv>Ingen</sv>
+		</text>
+		<text name="configuration_front">
+    		<en>Front</en>
+    		<de>Vorne</de>
+    		<fr>Avant</fr>
+    		<sv>Fram</sv>
+		</text>
+		<text name="configuration_Roof">
+    		<en>Roof</en>
+    		<de>Dach</de>
+    		<fr>Toit</fr>
+    		<sv>Tak</sv>
+		</text>
+		<text name="configuration_Rear">
+    		<en>Rear</en>
+    		<de>Hinten</de>
+    		<fr>Arrière</fr>
+    		<sv>Bak</sv>
+		</text>
+		<text name="configuration_All">
+    		<en>All</en>
+    		<de>Alle</de>
+    		<fr>Tous</fr>
+    		<sv>Alla</sv>
+		</text>
+		<text name="configuration_Roof_Rear">
+    		<en>Roof and rear</en>
+    		<de>Dach und hinten</de>
+    		<fr>Toit et arrière</fr>
+    		<sv>Tak och bak</sv>
+		</text>
+		<text name="configuration_StrobeBar_orange3">
+    		<en>Beacon light bar MittX</en>
+    		<de>Rundumleuchtenbalken MittX</de>
+    		<fr>Rampe lumineuse MittX</fr>
+    		<sv>Saftblandarramp MittX</sv>
+		</text>
+		<text name="configuration_StrobeBar_orange3">
+    		<en>Beacon light bar</en>
+    		<de>Rundumleuchtenbalken</de>
+    		<fr>Rampe lumineuse</fr>
+    		<sv>Saftblandarramp</sv>
+		</text>
+		<text name="configuration_lgfTriangle">
+    		<en>LGF Triangle</en>
+    		<de>LGF Dreieck</de>
+    		<fr>LGF Triangle</fr>
+    		<sv>LGF Triangel</sv>
+		</text>
+		<text name="configuration_fenders">
+    		<en>Fenders</en>
+    		<de>Kotflügel</de>
+    		<fr>Garde-boue</fr>
+    		<sv>Stänkskärmar</sv>
+		</text>
+		<text name="configuration_frontbar">
+    		<en>Frontbar</en>
+    		<de>Frontbügel</de>
+    		<fr>Arceau avant</fr>
+    		<sv>Frontbåge</sv>
+		</text>
+		<text name="configuration_abbruchgitter">
+    		<en>Abbruchgitter</en>
+    		<de>Abbruchgitter</de>
+    		<fr>Abbruchgitter</fr>
+    		<sv>Abbruchgitter</sv>
+		</text>
+		<text name="configuration_trailerAttacher">
+    		<en>Trailer Attacher</en>
+    		<de>Anhängerkupplung</de>
+    		<fr>Attelage</fr>
+    		<sv>Dragkrok</sv>
+		</text>
+		<text name="configuration_Rim_Color">
+    		<en>Rim Color</en>
+    		<de>Felgenfarbe</de>
+    		<fr>Couleur de jante</fr>
+    		<sv>Fälgfärg</sv>
+		</text>
+		<text name="configuration_Design_Color">
+    		<en>Design Color</en>
+    		<de>Designfarbe</de>
+    		<fr>Couleur du design</fr>
+    		<sv>Designfärg</sv>
+		</text>
+		<text name="configuration_VolvoRearLogo_Color">
+    		<en>Volvo Logo Rear Color</en>
+    		<de>Volvo Logo Hinten Farbe</de>
+    		<fr>Couleur Du Logo Volvo Arrière</fr>
+    		<sv>Volvo Logga Bak Färg</sv>
+		</text>
+		<text name="configuration_dualTire">
+    		<en>Dual tires</en>
+    		<de>Doppelbereifung</de>
+    		<fr>Pneus jumelés</fr>
+    		<sv>Dubbelhjul</sv>
+		</text>
+		<text name="configuration_singleTire">
+    		<en>Single Tires</en>
+    		<de>Einzelbereifung</de>
+    		<fr>Pneus simples</fr>
+    		<sv>Enkelhjul</sv>
+		</text>
+		<text name="actionIC_camBackBig">
+    		<en>IC: Minimize rear camera screen</en>
+    		<de>IC: Rückfahrkamera verkleinern</de>
+    		<fr>IC : Réduire l’écran de la caméra arrière</fr>
+    		<sv>IC: Minimera backkameraskärm</sv>
+		</text>
+		<text name="actionIC_camBackSmall">
+    		<en>IC: Extend rear camera screen</en>
+    		<de>IC: Rückfahrkamera vergrößern</de>
+    		<fr>IC : Agrandir l’écran de la caméra arrière</fr>
+    		<sv>IC: Expandera backkameraskärm</sv>
+		</text>
+		<text name="actionIC_camSideBig">
+    		<en>IC: Minimize side camera screen</en>
+    		<de>IC: Seitenkamera verkleinern</de>
+    		<fr>IC : Réduire l’écran de la caméra latérale</fr>
+    		<sv>IC: Minimera sidokameraskärm</sv>
+		</text>
+		<text name="actionIC_camSideSmall">
+    		<en>IC: Extend side camera screen</en>
+    		<de>IC: Seitenkamera vergrößern</de>
+    		<fr>IC : Agrandir l’écran de la caméra latérale</fr>
+    		<sv>IC: Expandera sidokameraskärm</sv>
+		</text>
+		<text name="actionIC_doorClose">
+    		<en>IC: Open door</en>
+    		<de>IC: Tür öffnen</de>
+    		<fr>IC : Ouvrir la porte</fr>
+    		<sv>IC: Öppna dörr</sv>
+		</text>
+		<text name="actionIC_doorOpen">
+    		<en>IC: Close door</en>
+    		<de>IC: Tür schließen</de>
+    		<fr>IC : Fermer la porte</fr>
+    		<sv>IC: Stäng dörr</sv>
+		</text>
+		<text name="actionIC_windowDoorLockMoveClose">
+    		<en>IC: Close side window</en>
+    		<de>IC: Seitenfenster schließen</de>
+    		<fr>IC : Fermer la fenêtre latérale</fr>
+    		<sv>IC: Stäng sidofönster</sv>
+		</text>
+		<text name="actionIC_windowDoorLockMoveOpen">
+    		<en>IC: Open side window</en>
+    		<de>IC: Seitenfenster öffnen</de>
+    		<fr>IC : Ouvrir la fenêtre latérale</fr>
+    		<sv>IC: Öppna sidofönster</sv>
+		</text>
+		<text name="actionIC_windowFrontFrameClose">
+    		<en>IC: Close front window</en>
+    		<de>IC: Frontfenster schließen</de>
+    		<fr>IC : Fermer la fenêtre avant</fr>
+    		<sv>IC: Stäng framruta</sv>
+			</text>
+		<text name="actionIC_windowFrontFrameOpen">
+    		<en>IC: Open front window</en>
+    		<de>IC: Frontfenster öffnen</de>
+    		<fr>IC : Ouvrir la fenêtre avant</fr>
+    		<sv>IC: Öppna framruta</sv>
+		</text>
+		<text name="actionIC_steeringWheelShow">
+    		<en>IC: Show steering wheel</en>
+    		<de>IC: Lenkrad anzeigen</de>
+    		<fr>IC : Afficher le volant</fr>
+    		<sv>IC: Visa ratt</sv>
+		</text>
+		<text name="actionIC_steeringWheelHide">
+    		<en>IC: Hide steering wheel</en>
+    		<de>IC: Lenkrad ausblenden</de>
+    		<fr>IC : Masquer le volant</fr>
+    		<sv>IC: Dölj ratt</sv>
+		</text>
+		<text name="actionIC_steeringBaseDown">
+    		<en>IC: Steering base down</en>
+    		<de>IC: Lenkrad ausblenden</de>
+    		<fr>IC : Masquer le volant</fr>
+    		<sv>IC: Dölj ratt</sv>
+		</text>
+		<text name="actionIC_steeringBaseUp">
+    		<en>IC: Steering base up</en>
+    		<de>IC: Lenkrad einblenden</de>
+   			<fr>IC : Afficher le volant</fr>
+    		<sv>IC: Visa ratt</sv>
+		</text>
+		<text name="actionIC_serviceDoorClose">
+    		<en>IC: Close service door</en>
+    		<de>IC: Servicetür schließen</de>
+    		<fr>IC : Fermer la trappe de service</fr>
+    		<sv>IC: Stäng servicedörr</sv>
+		</text>
+		<text name="actionIC_serviceDoorOpen">
+    		<en>IC: Open service door</en>
+    		<de>IC: Servicetür öffnen</de>
+    		<fr>IC : Ouvrir la trappe de service</fr>
+    		<sv>IC: Öppna servicedörr</sv>
+		</text>
+		<text name="actionIC_engineLidClose">
+    		<en>IC: Close engine lid</en>
+    		<de>IC: Motorhaube schließen</de>
+    		<fr>IC : Fermer le capot moteur</fr>
+    		<sv>IC: Stäng motorhuv</sv>
+		</text>
+		<text name="actionIC_engineLidOpen">
+    		<en>IC: Open engine lid</en>
+    		<de>IC: Motorhaube öffnen</de>
+    		<fr>IC : Ouvrir le capot moteur</fr>
+    		<sv>IC: Öppna motorhuv</sv>
+		</text>
+		<text name="actionIC_toolboxClose">
+    		<en>IC: Close toolbox</en>
+    		<de>IC: Werkzeugkasten schließen</de>
+    		<fr>IC : Fermer la boîte à outils</fr>
+    		<sv>IC: Stäng verktygslåda</sv>
+		</text>
+		<text name="actionIC_toolboxOpen">
+    		<en>IC: Open toolbox</en>
+    		<de>IC: Werkzeugkasten öffnen</de>
+    		<fr>IC : Ouvrir la boîte à outils</fr>
+    		<sv>IC: Öppna verktygslåda</sv>
+		</text>
+		<text name="actionIC_dieselHoseBoxClose">
+    		<en>IC: Close diesel hose box</en>
+    		<de>IC: Dieselschlauchkasten schließen</de>
+    		<fr>IC : Fermer le coffre du tuyau diesel</fr>
+    		<sv>IC: Stäng diesel slanglåda</sv>
+		</text>
+		<text name="actionIC_dieselHoseBoxOpen">
+    		<en>IC: Open diesel hose box</en>
+    		<de>IC: Dieselschlauchkasten öffnen</de>
+    		<fr>IC : Ouvrir le coffre du tuyau diesel</fr>
+    		<sv>IC: Öppna diesel slanglåda</sv>
+		</text>
+	</l10n>
+</modDesc>

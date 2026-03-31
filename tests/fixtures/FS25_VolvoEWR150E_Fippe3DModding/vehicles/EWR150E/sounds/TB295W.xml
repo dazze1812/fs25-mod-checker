@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<sounds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/vehicle_sounds.xsd">
+           <motorized>
+        <sounds>
+            <motor template="engineMedium" file="$data/vehicles/volvo/l120H/sounds/l120H_loop.gls" linkNodeOffset="0 2 -2.2" pitchScale="1" volumeScale="1.2" >
+                <volume outdoor="1.0" indoor="0.85"/>
+            </motor>
+            <motor template="fanModern_01" linkNodeOffset="0 2 -3.3" volumeScale="1.8" pitchScale="1.3"/>
+            <motor template="cabinTractor_01" linkNodeOffset="0 3 0" volumeScale="1.5"/>
+            <motor template="indoorCabinRumble" volumeScale="9" pitchScale="1.1" linkNodeOffset="-0.7 3 0"/>
+            <motor template="indoorCabinRumble" volumeScale="9" pitchScale="1.3" linkNodeOffset="0.7 3 0"/>
+        </sounds>
+    </motorized>
+	
+	<reverseDrive template="sounds1/reverseBeepVolvo.ogg" linkNode="0>" >
+        <volume indoor="2.4" outdoor="3.0" >
+        </volume>
+    </reverseDrive>
+
+
+    <honk>
+        <sound template="honkVolvoWheelLoader" />
+    </honk>
+   
+	  <drivable>
+        <sounds>
+            <waterSplash template="waterSplash01" />
+        </sounds>
+    </drivable>
+	
+</sounds>

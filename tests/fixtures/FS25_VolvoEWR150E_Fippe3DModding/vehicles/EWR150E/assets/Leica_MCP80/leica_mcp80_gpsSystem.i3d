@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="leica_mcp80_gpsSystem" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="i3dConverter" version="1.0"/>
+  </Asset>
+
+  <Files>
+    <File fileId="31" filename="$data/shaders/glowShader.xml"/>
+    <File fileId="3" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="2" filename="$data/shared/default_specular.dds"/>
+    <File fileId="20" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_diffuse.png"/>
+    <File fileId="19" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_normal.png"/>
+    <File fileId="18" filename="$data/shared/detailLibrary/calibrated/calibratedPaint_specular.png"/>
+    <File fileId="28" filename="$data/shared/detailLibrary/calibrated/grainSmall_specular.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/metallic/clear_diffuse.png"/>
+    <File fileId="13" filename="$data/shared/detailLibrary/metallic/clear_specular.png"/>
+    <File fileId="22" filename="$data/shared/detailLibrary/metallic/silverScratched_diffuse.png"/>
+    <File fileId="21" filename="$data/shared/detailLibrary/metallic/silverScratched_specular.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_diffuse.png"/>
+    <File fileId="4" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_specular.png"/>
+    <File fileId="25" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.png"/>
+    <File fileId="24" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.png"/>
+    <File fileId="17" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubberBlack_diffuse.png"/>
+    <File fileId="16" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_normal.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_specular.png"/>
+    <File fileId="1" filename="$data/shared/white_diffuse.dds"/>
+    <File fileId="26" filename="$data/shared/window_diffuse.dds"/>
+    <File fileId="27" filename="$data/shared/window_specular.dds"/>
+    <File fileId="23" filename="textures/leicaMCP80_textures.png"/>
+    <File fileId="29" filename="textures/screen_textures.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="leica_chrome_mat" materialId="2" diffuseColor="0.8 0.8 0.8 1" specularColor="0.701961 1 0.901961" customShaderId="3">
+      <Custommap name="detailSpecular" fileId="13"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+      <CustomParameter name="colorScale" value="0.8 0.8 0.8"/>
+    </Material>
+    <Material name="leica_metalPaintedBlack_mat" materialId="1" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="4"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="6"/>
+      <CustomParameter name="colorScale" value="0.013 0.013 0.013"/>
+    </Material>
+    <Material name="leicaMCP80_textures" materialId="6">
+      <Texture fileId="23"/>
+    </Material>
+    <Material name="mcp80_AMAZONE_YELLOW2_mat" materialId="4" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="18"/>
+      <Custommap name="detailNormal" fileId="19"/>
+      <Custommap name="detailDiffuse" fileId="20"/>
+      <CustomParameter name="colorScale" value="0.924 0.7155 0.06"/>
+      <CustomParameter name="smoothnessScale" value="0.85"/>
+      <CustomParameter name="clearCoatIntensity" value="0.1"/>
+      <CustomParameter name="clearCoatSmoothness" value="0.2"/>
+    </Material>
+    <Material name="mcp80_glassWindow_mat" materialId="8" alphaBlending="true" customShaderId="3">
+      <Texture fileId="26"/>
+      <Glossmap fileId="27"/>
+      <Custommap name="detailSpecular" fileId="28"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="14"/>
+    </Material>
+    <Material name="mcp80_plasticPaintedBlack_mat" materialId="7" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="24"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="25"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+    </Material>
+    <Material name="mcp80_silverScratched_mat" materialId="5" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="21"/>
+      <Custommap name="detailNormal" fileId="5"/>
+      <Custommap name="detailDiffuse" fileId="22"/>
+      <CustomParameter name="colorScale" value="0.85 0.85 0.85"/>
+    </Material>
+    <Material name="mcp80ElectricCables_rubberBlackHose_mat" materialId="3" customShaderId="3">
+      <Texture fileId="1"/>
+      <Glossmap fileId="2"/>
+      <Custommap name="detailSpecular" fileId="15"/>
+      <Custommap name="detailNormal" fileId="16"/>
+      <Custommap name="detailDiffuse" fileId="17"/>
+      <CustomParameter name="colorScale" value="0.01 0.01 0.01"/>
+      <CustomParameter name="porosity" value="0.5"/>
+    </Material>
+    <Material name="screen_texture" materialId="9" specularColor="0 1 0.301961" customShaderId="31" customShaderVariation="staticLight">
+      <Texture fileId="29"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="leica_mcp80_gpsSystem.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="leica_mcp80_gpsSystem" nodeId="32">
+      <Shape name="leicaGPS_attacher_01" translation="0.410834 2.74833 -1.66546" shapeId="1" clipDistance="300" nodeId="33" castsShadows="true" receiveShadows="true" materialIds="1,2,3">
+        <Shape name="gps_icg82_01" translation="2.98023e-08 0.425371 2.38419e-07" rotation="0 25.137 0" shapeId="2" clipDistance="300" nodeId="34" castsShadows="true" receiveShadows="true" materialIds="4,3,5">
+          <Shape name="icon_icg82_textures_01" translation="1.19209e-07 0.0388012 -0.000636578" rotation="0 -25.137 0" shapeId="3" clipDistance="300" nodeId="35" castsShadows="false" receiveShadows="true" materialIds="6"/>
+        </Shape>
+        <Shape name="iconGeosystems_textures_01" translation="9.89437e-06 0.227112 -0.0413697" scale="1 0.743754 1" shapeId="4" clipDistance="300" nodeId="36" castsShadows="false" receiveShadows="true" materialIds="6"/>
+        <Shape name="iconLeica_textures_01" translation="9.89437e-06 0.356849 -0.0413697" shapeId="5" clipDistance="300" nodeId="37" castsShadows="false" receiveShadows="true" materialIds="6"/>
+      </Shape>
+      <Shape name="leicaGPS_attacher_02" translation="-0.410834 2.74833 -1.66546" shapeId="6" clipDistance="300" nodeId="38" castsShadows="true" receiveShadows="true" materialIds="1,2,3">
+        <Shape name="gps_icg82_02" translation="-2.98023e-08 0.425371 0" rotation="0 25.137 0" shapeId="7" clipDistance="300" nodeId="39" castsShadows="true" receiveShadows="true" materialIds="4,3,5">
+          <Shape name="icon_icg82_textures_02" translation="0.000489384 0.0387509 -0.000406265" rotation="0 -25.137 0" shapeId="8" clipDistance="300" nodeId="40" castsShadows="false" receiveShadows="true" materialIds="6"/>
+        </Shape>
+        <Shape name="iconGeosystems_textures_02" translation="-1.42157e-05 0.227112 -0.0413698" scale="1 0.743754 1" shapeId="4" clipDistance="300" nodeId="41" castsShadows="false" receiveShadows="true" materialIds="6"/>
+        <Shape name="iconLeica_textures_02" translation="-1.508e-05 0.356849 -0.0413698" shapeId="5" clipDistance="300" nodeId="42" castsShadows="false" receiveShadows="true" materialIds="6"/>
+      </Shape>
+      <Shape name="leicaGPSbox" translation="0.755093 2.2914 -0.210745" rotation="90 10 0" shapeId="9" clipDistance="300" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="4,3">
+        <Shape name="leicaGPSbox_lid" translation="-5.96046e-08 -2.23517e-08 2.41759e-07" rotation="0 -0 -8.53774e-07" shapeId="10" clipDistance="300" nodeId="44" castsShadows="true" receiveShadows="true" materialIds="4,3"/>
+      </Shape>
+      <Shape name="mcp80_screenAttacher" translation="0.362718 2.74136 0.859502" rotation="10 -31.977 0" shapeId="11" clipDistance="300" nodeId="45" castsShadows="true" receiveShadows="true" materialIds="7,5">
+        <Shape name="mcp80_attacher" rotation="-0.733801 -35.2511 7.15886" shapeId="12" clipDistance="300" nodeId="46" castsShadows="true" receiveShadows="true" materialIds="7">
+          <Shape name="mcp80_windowAttacher" translation="1.15633e-05 1.41561e-07 0.0789177" rotation="-12.3293 -21.5661 4.43214" shapeId="13" clipDistance="300" nodeId="47" castsShadows="true" receiveShadows="true" materialIds="7,8"/>
+        </Shape>
+        <Shape name="mcp80_electricCables" translation="-0.0707735 0.0496333 -0.0111837" rotation="-11.7428 31.4352 -6.18731" shapeId="14" clipDistance="300" nodeId="48" castsShadows="true" receiveShadows="true" materialIds="3"/>
+        <Shape name="mcp80_screen" translation="-5.96046e-08 -3.27826e-07 5.96046e-08" rotation="0 5.16989e-06 -1.01271e-06" shapeId="15" clipDistance="300" nodeId="49" castsShadows="true" receiveShadows="true" materialIds="7,4">
+          <TransformGroup name="screen_decals" translation="0.015793 -0.000782639 -0.0588684" rotation="-8.53774e-07 180 1.17361e-06" clipDistance="300" nodeId="50">
+            <Shape name="leicaMCP80_textures" translation="-0.0700532 0.0608813 0.00601828" rotation="-90.0035 179.967 -0.00573185" shapeId="16" clipDistance="300" nodeId="51" castsShadows="false" receiveShadows="true" materialIds="6"/>
+            <Shape name="screen_textures" translation="5.96046e-08 -0.00173023 0.00189835" rotation="0 1.6134e-06 1.07047e-07" shapeId="17" clipDistance="300" nodeId="52" castsShadows="false" receiveShadows="true" materialIds="9"/>
+            <Shape name="screenBucketDig_textures" translation="0.0356925 0.0128301 0.00331941" rotation="0 1.6134e-06 1.07047e-07" shapeId="18" clipDistance="300" nodeId="53" castsShadows="false" receiveShadows="true" materialIds="9"/>
+            <Shape name="screenBucketTilt_textures" translation="-0.0242147 -0.00802948 0.00331941" rotation="0 1.6134e-06 1.07047e-07" shapeId="19" clipDistance="300" nodeId="54" castsShadows="false" receiveShadows="true" materialIds="9"/>
+          </TransformGroup>
+        </Shape>
+      </Shape>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

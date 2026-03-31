@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="lizardBeaconLightBar.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="4" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="1" filename="$data/shared/clearPlastic_diffuse.dds"/>
+    <File fileId="13" filename="$data/shared/default_specular.dds"/>
+    <File fileId="3" filename="$data/shared/default_vmask.dds"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/metallic/clear_diffuse.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/metallic/clear_specular.png"/>
+    <File fileId="20" filename="$data/shared/detailLibrary/metallic/silverScratched_diffuse.png"/>
+    <File fileId="19" filename="$data/shared/detailLibrary/metallic/silverScratched_specular.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.png"/>
+    <File fileId="18" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubberBlack_diffuse.png"/>
+    <File fileId="17" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_normal.png"/>
+    <File fileId="16" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_specular.png"/>
+    <File fileId="12" filename="$data/shared/white_diffuse.dds"/>
+    <File fileId="2" filename="texture/lizardBeaconLightBar_normals.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="chrome" materialId="5" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="5"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="7"/>
+    </Material>
+    <Material name="chromeOrange" materialId="6" alphaBlending="true" customShaderId="4">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="5"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="7"/>
+      <CustomParameter name="colorScale" value="1 0.2 0"/>
+      <CustomParameter name="metalnessScale" value="0.8"/>
+    </Material>
+    <Material name="plasticPaintedBlack" materialId="7" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="15"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+    </Material>
+    <Material name="plasticPaintedWhite" materialId="8" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="15"/>
+    </Material>
+    <Material name="rubberBlack" materialId="9" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="16"/>
+      <Custommap name="detailNormal" fileId="17"/>
+      <Custommap name="detailDiffuse" fileId="18"/>
+      <CustomParameter name="colorScale" value="0.012 0.012 0.012"/>
+      <CustomParameter name="smoothnessScale" value="0"/>
+      <CustomParameter name="porosity" value="0.5"/>
+    </Material>
+    <Material name="silverScratched" materialId="10" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="19"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="20"/>
+      <CustomParameter name="colorScale" value="0.7 0.7 0.7"/>
+    </Material>
+    <Material name="silverScratchedBlack" materialId="11" customShaderId="4">
+      <Texture fileId="12"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="13"/>
+      <Custommap name="detailSpecular" fileId="19"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="20"/>
+      <CustomParameter name="colorScale" value="0.07 0.07 0.07"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="lizardBeaconLightBar.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="lowProfile_transparentBeaconLightBar1000" translation="0 3.19439 -0.991091" shapeId="1" clipDistance="400" nodeId="61" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_01" translation="0 -0.0831916 0" nodeId="62">
+        <TransformGroup name="beaconLight04_01_01" translation="-0.362317 0 0" nodeId="63"/>
+        <TransformGroup name="beaconLight04_01_02" nodeId="64"/>
+        <TransformGroup name="beaconLight04_01_03" translation="0.363615 0 0" nodeId="65"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher1000" translation="0 -0.0884356 0" shapeId="2" clipDistance="400" nodeId="66" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_1000" translation="0.377 -0.0199113 0.0655262" shapeId="3" nodeId="67" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_transparentBeaconLightBar1500" translation="0 3.19439 -0.991091" shapeId="4" clipDistance="400" nodeId="68" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_02" translation="0 -0.0831916 0" nodeId="69">
+        <TransformGroup name="beaconLight04_02_01" translation="-0.575 0 0" nodeId="70"/>
+        <TransformGroup name="beaconLight04_02_02" translation="-0.185 0 0" nodeId="71"/>
+        <TransformGroup name="beaconLight04_02_03" translation="0.185 0 0" nodeId="72"/>
+        <TransformGroup name="beaconLight04_02_04" translation="0.575 0 0" nodeId="73"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_transparent1500" translation="0 -0.0884356 0" shapeId="5" clipDistance="400" nodeId="74" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_transparent1500" translation="0.592 -0.0199113 0.0655262" shapeId="6" nodeId="75" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_transparentBeaconLightBar2000" translation="0 3.19439 -0.991091" shapeId="7" clipDistance="400" nodeId="76" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_03" translation="0 -0.0831916 0" nodeId="77">
+        <TransformGroup name="beaconLight04_03_01" translation="-0.89 0 0" nodeId="78"/>
+        <TransformGroup name="beaconLight04_03_02" translation="-0.535 0 0" nodeId="79"/>
+        <TransformGroup name="beaconLight04_03_03" translation="-0.185 0 0" nodeId="80"/>
+        <TransformGroup name="beaconLight04_03_04" translation="0.185 0 0" nodeId="81"/>
+        <TransformGroup name="beaconLight04_03_05" translation="0.535 0 0" nodeId="82"/>
+        <TransformGroup name="beaconLight04_03_06" translation="0.89 0 0" nodeId="83"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_transparent2000" translation="0 -0.0884356 0" shapeId="8" clipDistance="400" nodeId="84" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_transparent2000" translation="0.797 -0.0199113 0.0655262" shapeId="9" nodeId="85" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_transparentBeaconLightBar2500" translation="0 3.19439 -0.991091" shapeId="10" clipDistance="400" nodeId="86" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_04" translation="0 -0.0831916 0" nodeId="87">
+        <TransformGroup name="beaconLight04_04_01" translation="-1.14 0 0" nodeId="88"/>
+        <TransformGroup name="beaconLight04_04_02" translation="-0.785 0 0" nodeId="89"/>
+        <TransformGroup name="beaconLight04_04_03" translation="-0.185 0 0" nodeId="90"/>
+        <TransformGroup name="beaconLight04_04_04" translation="0.185 0 0" nodeId="91"/>
+        <TransformGroup name="beaconLight04_04_05" translation="0.785 0 0" nodeId="92"/>
+        <TransformGroup name="beaconLight04_04_06" translation="1.14 0 4.17233e-07" nodeId="93"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_transparent2500" translation="0 -0.0884356 0" shapeId="11" clipDistance="400" nodeId="94" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_transparent2500" translation="0.797 -0.0199113 0.0655262" shapeId="12" nodeId="95" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_whiteBeaconLightBar1000" translation="0 3.21185 -0.991091" shapeId="13" clipDistance="400" nodeId="96" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_05" translation="-1.49012e-08 -0.100647 0" nodeId="97">
+        <TransformGroup name="beaconLight04_05_01" translation="-0.285 0 0" nodeId="98"/>
+        <TransformGroup name="beaconLight04_05_02" translation="0.285 0 0" nodeId="99"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_white1000" translation="0 -0.105891 0" shapeId="14" clipDistance="400" nodeId="100" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_white1000" translation="0.377 -0.0199113 0.0655262" shapeId="15" nodeId="101" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_whiteBeaconLightBar1500" translation="0 3.21185 -0.991091" shapeId="16" clipDistance="400" nodeId="102" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_06" translation="-1.49012e-08 -0.100647 0" nodeId="103">
+        <TransformGroup name="beaconLight04_06_01" translation="-0.534 0 0" nodeId="104"/>
+        <TransformGroup name="beaconLight04_06_02" translation="0.534 0 0" nodeId="105"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_white1500" translation="0 -0.105891 0" shapeId="17" clipDistance="400" nodeId="106" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_white1500" translation="0.592 -0.0199113 0.0655264" shapeId="18" nodeId="107" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_whiteBeaconLightBar2000" translation="0 3.21185 -0.991091" shapeId="19" clipDistance="400" nodeId="108" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_07" translation="0 -0.100647 0" nodeId="109">
+        <TransformGroup name="beaconLight04_07_01" translation="-0.885 0 4.17233e-07" nodeId="110"/>
+        <TransformGroup name="beaconLight04_07_02" translation="-0.535 0 0" nodeId="111"/>
+        <TransformGroup name="beaconLight04_07_03" translation="0.535 0 0" nodeId="112"/>
+        <TransformGroup name="beaconLight04_07_04" translation="0.885 0 0" nodeId="113"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_white2000" translation="0 -0.105891 0" shapeId="20" clipDistance="400" nodeId="114" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_white2000" translation="0.797 -0.0199113 0.0655262" shapeId="21" nodeId="115" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="lowProfile_whiteBeaconLightBar2500" translation="0 3.21185 -0.991091" shapeId="22" clipDistance="400" nodeId="116" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_08" translation="0 -0.100647 0" nodeId="117">
+        <TransformGroup name="beaconLight04_08_01" translation="-1.14 0 0" nodeId="118"/>
+        <TransformGroup name="beaconLight04_08_02" translation="-0.78 0 0" nodeId="119"/>
+        <TransformGroup name="beaconLight04_08_03" translation="0.78 0 0" nodeId="120"/>
+        <TransformGroup name="beaconLight04_08_04" translation="1.14 0 0" nodeId="121"/>
+      </TransformGroup>
+      <Shape name="lowProfile_roofAttacher_white2500" translation="0 -0.105891 0" shapeId="23" clipDistance="400" nodeId="122" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="lowProfile_feet_white2500" translation="0.797 -0.0199113 0.0655262" shapeId="24" nodeId="123" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="transparentBeaconLightBar1000" translation="0 3.19439 -0.991091" shapeId="25" clipDistance="400" nodeId="124" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_09" translation="0 -0.0831916 0" nodeId="125">
+        <TransformGroup name="beaconLight04_09_01" translation="-0.362317 0 0" nodeId="126"/>
+        <TransformGroup name="beaconLight04_09_02" nodeId="127"/>
+        <TransformGroup name="beaconLight04_09_03" translation="0.363615 0 0" nodeId="128"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_transparent1000" translation="0 -0.0884356 0" shapeId="26" clipDistance="400" nodeId="129" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_transparent1000" translation="0.377 -0.0199113 0.0655262" shapeId="27" nodeId="130" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="transparentBeaconLightBar1500" translation="0 3.19439 -0.991091" shapeId="28" clipDistance="400" nodeId="131" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_10" translation="0 -0.0831916 0" nodeId="132">
+        <TransformGroup name="beaconLight04_10_01" translation="-0.575 0 0" nodeId="133"/>
+        <TransformGroup name="beaconLight04_10_02" translation="-0.185 0 0" nodeId="134"/>
+        <TransformGroup name="beaconLight04_10_03" translation="0.185 0 0" nodeId="135"/>
+        <TransformGroup name="beaconLight04_10_04" translation="0.575 0 0" nodeId="136"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_transparent1500" translation="0 -0.0884356 0" shapeId="29" clipDistance="400" nodeId="137" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_transparent1500" translation="0.592 -0.0199113 0.0655262" shapeId="30" nodeId="138" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="transparentBeaconLightBar2000" translation="0 3.19439 -0.991091" shapeId="31" clipDistance="400" nodeId="139" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_11" translation="0 -0.0831916 0" nodeId="140">
+        <TransformGroup name="beaconLight04_11_01" translation="-0.89 0 0" nodeId="141"/>
+        <TransformGroup name="beaconLight04_11_02" translation="-0.535 0 0" nodeId="142"/>
+        <TransformGroup name="beaconLight04_11_03" translation="-0.185 0 0" nodeId="143"/>
+        <TransformGroup name="beaconLight04_11_04" translation="0.185 0 0" nodeId="144"/>
+        <TransformGroup name="beaconLight04_11_05" translation="0.535 0 0" nodeId="145"/>
+        <TransformGroup name="beaconLight04_11_06" translation="0.89 0 0" nodeId="146"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_transparent2000" translation="0 -0.0884356 0" shapeId="32" clipDistance="400" nodeId="147" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_transparent2000" translation="0.797 -0.0199113 0.0655262" shapeId="33" nodeId="148" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="transparentBeaconLightBar2500" translation="0 3.19439 -0.991091" shapeId="34" clipDistance="400" nodeId="149" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_12" translation="0 -0.0831916 0" nodeId="150">
+        <TransformGroup name="beaconLight04_12_01" translation="-1.14 0 0" nodeId="151"/>
+        <TransformGroup name="beaconLight04_12_02" translation="-0.785 0 0" nodeId="152"/>
+        <TransformGroup name="beaconLight04_12_03" translation="-0.185 0 0" nodeId="153"/>
+        <TransformGroup name="beaconLight04_12_04" translation="0.185 0 0" nodeId="154"/>
+        <TransformGroup name="beaconLight04_12_05" translation="0.785 0 0" nodeId="155"/>
+        <TransformGroup name="beaconLight04_12_06" translation="1.14 0 4.17233e-07" nodeId="156"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_transparent2500" translation="0 -0.0884356 0" shapeId="35" clipDistance="400" nodeId="157" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_transparent2500" translation="0.797 -0.0199113 0.0655262" shapeId="36" nodeId="158" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="whiteBeaconLightBar1000" translation="0 3.21185 -0.991091" shapeId="37" clipDistance="400" nodeId="159" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_13" translation="-1.49012e-08 -0.100647 0" nodeId="160">
+        <TransformGroup name="beaconLight04_13_01" translation="-0.284 0 0" nodeId="161"/>
+        <TransformGroup name="beaconLight04_13_02" translation="0.284 0 0" nodeId="162"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_white1000" translation="0 -0.105891 0" shapeId="38" clipDistance="400" nodeId="163" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_white1000" translation="0.377 -0.0199113 0.0655262" shapeId="39" nodeId="164" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="whiteBeaconLightBar1500" translation="0 3.21185 -0.991091" shapeId="40" clipDistance="400" nodeId="165" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_14" translation="-1.49012e-08 -0.100647 0" nodeId="166">
+        <TransformGroup name="beaconLight04_14_01" translation="-0.534 0 0" nodeId="167"/>
+        <TransformGroup name="beaconLight04_14_02" translation="0.534 0 0" nodeId="168"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_white1500" translation="0 -0.105891 0" shapeId="41" clipDistance="400" nodeId="169" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_white1500" translation="0.592 -0.0199113 0.0655265" shapeId="42" nodeId="170" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="whiteBeaconLightBar2000" translation="0 3.21185 -0.991091" shapeId="43" clipDistance="400" nodeId="171" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_15" translation="0 -0.100647 0" nodeId="172">
+        <TransformGroup name="beaconLight04_15_01" translation="-0.885 0 4.17233e-07" nodeId="173"/>
+        <TransformGroup name="beaconLight04_15_02" translation="-0.535 0 0" nodeId="174"/>
+        <TransformGroup name="beaconLight04_15_03" translation="0.535 0 0" nodeId="175"/>
+        <TransformGroup name="beaconLight04_15_04" translation="0.885 0 0" nodeId="176"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_white2000" translation="0 -0.105891 0" shapeId="44" clipDistance="400" nodeId="177" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_white2000" translation="0.797 -0.0199113 0.0655262" shapeId="45" nodeId="178" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+    <Shape name="whiteBeaconLightBar2500" translation="0 3.21185 -0.991091" shapeId="46" clipDistance="400" nodeId="179" castsShadows="true" receiveShadows="true" materialIds="6,7,8,5,9">
+      <TransformGroup name="beaconLight04_16" translation="0 -0.100647 0" nodeId="180">
+        <TransformGroup name="beaconLight04_16_01" translation="-1.14 0 0" nodeId="181"/>
+        <TransformGroup name="beaconLight04_16_02" translation="-0.78 0 0" nodeId="182"/>
+        <TransformGroup name="beaconLight04_16_03" translation="0.78 0 0" nodeId="183"/>
+        <TransformGroup name="beaconLight04_16_04" translation="1.14 0 0" nodeId="184"/>
+      </TransformGroup>
+      <Shape name="roofAttacher_white2500" translation="0 -0.105891 0" shapeId="47" clipDistance="400" nodeId="185" castsShadows="true" receiveShadows="true" materialIds="10,7">
+        <Shape name="feet_white2500" translation="0.797 -0.0199113 0.0655262" shapeId="48" nodeId="186" castsShadows="false" receiveShadows="false" materialIds="11,10"/>
+      </Shape>
+    </Shape>
+  </Scene>
+
+</i3D>

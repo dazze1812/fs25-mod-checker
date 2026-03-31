@@ -1,13 +1,15 @@
 # FS25 Mod Checker
 
-Python CLI that validates i3dMappings in FS25 mod XML files, with VS Code problem matcher support.
+Python CLI that validates i3dMappings in all FS25 mod XML files listed in modDesc.xml, with VS Code problem matcher support.
 
 ## Features
 
-- Validates i3dMapping node paths against the I3D scene graph
-- Detects duplicate mapping IDs and duplicate mapped paths
+- Validates all i3dMappings in all XML files declared in modDesc.xml
+- Checks that i3dMapping node paths exist in their corresponding I3D scene graphs
+- Detects duplicate mapping IDs and duplicate mapped node paths
 - Detects unused mappings and common name mismatches
 - Detects references to non-existent mapping IDs or node paths
+- Verifies that all referenced files in XML and I3D files exist in the mod folder
 - VS Code task and problem matcher bootstrap via --init
 - Built-in mod ZIP packaging via --package
 
@@ -32,17 +34,18 @@ pip install -e .
 
 ## Usage
 
-### Validate a mod XML
+### Validate a mod folder
+
+Run the checker on a mod folder that contains a modDesc.xml:
 
 ```cmd
-fs25-mod-checker path\to\vehicle.xml
+fs25-mod-checker path\to\mod\folder
 ```
 
-Optional explicit I3D file:
-
-```cmd
-fs25-mod-checker path\to\vehicle.xml --i3d path\to\vehicle.i3d
-```
+The checker automatically:
+- Parses modDesc.xml to find all storeItem XML files
+- For each XML file, derives the i3d filename (same stem, `.i3d` extension)
+- Runs all checks on each file pair
 
 Output format (VS Code matcher compatible):
 
@@ -52,23 +55,23 @@ absolute\path\to\file.xml:line:1: warning: rule-id: message
 
 Note: column is currently emitted as 1.
 
-### Initialize VS Code tasks
+### Initialize VS Code tasks with mod folder
 
-From your mod project root:
+Initialize VS Code workspace tasks using the mod folder argument:
 
 ```cmd
-fs25-mod-checker --init
+fs25-mod-checker path\to\mod\folder --init
 ```
 
 This creates or updates [.vscode/tasks.json](.vscode/tasks.json) with:
 
-- Check Mod (fs25-mod-checker)
-- Package Mod (Create ZIP)
+- Check Mod (fs25-mod-checker) — pre-filled with the mod folder path
+- Package Mod (Create ZIP) — packages the current workspace
 
-Then set your XML file path in task args, for example:
+Without a mod folder argument, `--init` still works but doesn't pre-fill the mod path:
 
-```json
-"args": ["vehicles/MyMod/MyMod.xml"]
+```cmd
+fs25-mod-checker --init
 ```
 
 More details: [.vscode/PROBLEM_MATCHER_SETUP.md](.vscode/PROBLEM_MATCHER_SETUP.md)
@@ -103,6 +106,7 @@ fs25-mod-checker --version
 | unused-mapping-id-name-mismatch | Unused mapping where node name does not match ID |
 | reference-to-non-existent-id | Attribute references a non-existent mapping ID |
 | reference-to-non-existent-path | Attribute references a non-existent I3D path |
+| missing-reference-file | Referenced file in XML or I3D does not exist in mod folder |
 
 ## Development
 
@@ -118,10 +122,10 @@ Run type checking:
 uv run pyright
 ```
 
-Run checker on fixture:
+Run checker on fixture mod folder:
 
 ```cmd
-uv run fs25-mod-checker tests/fixtures/VolvoEWR150E.xml
+uv run fs25-mod-checker tests/fixtures/FS25_VolvoEWR150E_Fippe3DModding
 ```
 
 Build Windows executable:

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="tiltrotatorX20.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="12" filename="$data/shaders/decalShader.xml"/>
+    <File fileId="11" filename="X20decals.dds"/>
+    <File fileId="4" filename="vehicleShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="col" materialId="5" diffuseColor="0.8 0.8 0.8 1" specularColor="1 1 1">
+    </Material>
+    <Material name="default" materialId="6" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="i3d_default_material" materialId="7" diffuseColor="0.8 0.8 0.8 1" specularColor="0.6 1 0">
+    </Material>
+    <Material name="SecondMat" materialId="8" diffuseColor="0.0313726 0.0313726 0.0313726 1" specularColor="0.494118 1 0" customShaderId="4" customShaderVariation="colorMask">
+      <CustomParameter name="colorMat0" value="0.03 0.03 0.03 0"/>
+      <CustomParameter name="colorMat1" value="1 1 1 2"/>
+      <CustomParameter name="colorMat2" value="0 0 0 46"/>
+      <CustomParameter name="colorMat3" value="0 1 0 46"/>
+      <CustomParameter name="colorMat4" value="1 1 1 1"/>
+    </Material>
+    <Material name="SteelwristX20decals" materialId="9" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="12">
+      <Texture fileId="11"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="tiltrotatorX20.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="SteelwristMainComp" rotation="-6.83019e-06 -0 0" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" density="6" solverIterationCount="10" clipDistance="300" nodeId="39" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6">
+      <Shape name="SteelWrist" translation="0.00809482 0.27 -0.0126543" rotation="6.83019e-06 -0 0" shapeId="2" nodeId="40" castsShadows="true" receiveShadows="true" materialIds="8">
+        <Shape name="Tilt" translation="-2.79397e-09 -2.38419e-07 -5.40167e-08" shapeId="3" nodeId="41" castsShadows="true" receiveShadows="true" materialIds="8">
+          <Shape name="Rotor" translation="0 -0.16 -0.046382" shapeId="4" nodeId="42" castsShadows="true" receiveShadows="true" materialIds="8">
+            <Shape name="ClawLeft" translation="0.207 -0.075296 0.386496" shapeId="5" nodeId="43" castsShadows="true" receiveShadows="true" materialIds="8">
+              <TransformGroup name="ClawHydLeftRefPoint" translation="0.05 -0.00349948 0.102027" rotation="0 -1.7357 0" nodeId="44"/>
+              <TransformGroup name="clawCol" translation="-0.0357166 -0.0132383 0.118504" rotation="180 2.43257 2.94686e-07" nodeId="45">
+                <Shape name="clawCol5" translation="0 1.49012e-08 0" shapeId="6" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="46" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol6" translation="0 1.49012e-08 0" shapeId="7" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="47" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol7" translation="0 1.49012e-08 0" shapeId="8" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="48" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol8" translation="0 1.49012e-08 0" shapeId="9" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="49" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+              </TransformGroup>
+            </Shape>
+            <Shape name="ClawRight" translation="-0.201619 -0.0757821 0.380693" shapeId="10" nodeId="50" castsShadows="true" receiveShadows="true" materialIds="8">
+              <TransformGroup name="ClawHydRightPoint" translation="-0.056527 -0.00260085 0.10739" rotation="0 1.48346 0" nodeId="51"/>
+              <TransformGroup name="ClawCol" translation="1.49012e-08 0.0385202 0.0951382" rotation="180 -0 0" nodeId="52">
+                <Shape name="clawCol1" shapeId="11" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="53" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol2" shapeId="12" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="54" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol3" shapeId="13" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="55" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+                <Shape name="clawCol4" shapeId="14" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x2002" staticFriction="2" dynamicFriction="2" clipDistance="300" nodeId="56" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="5"/>
+              </TransformGroup>
+            </Shape>
+            <Shape name="ClawLeftHyd" translation="0.273333 -0.0855067 -0.105895" rotation="0 -1.7357 0" shapeId="15" nodeId="57" castsShadows="true" receiveShadows="true" materialIds="8">
+              <Shape name="ClawLeftHydPunch" translation="0.00157189 0.00233936 0.319996" rotation="0 -0.0849582 0" shapeId="16" nodeId="58" castsShadows="true" receiveShadows="true" materialIds="8"/>
+            </Shape>
+            <Shape name="ClawRightHyd" translation="-0.274489 -0.0855067 -0.105895" rotation="0 1.48346 0" shapeId="17" nodeId="59" castsShadows="true" receiveShadows="true" materialIds="8">
+              <Shape name="ClawRightHydPunch" translation="0.00164786 0.00275135 0.319618" rotation="0 1.48346 0" shapeId="18" nodeId="60" castsShadows="true" receiveShadows="true" materialIds="8"/>
+            </Shape>
+            <TransformGroup name="ClawHydLeftRefFrame" translation="0.273333 -0.0855066 -0.105895" rotation="0 -1.7357 0" nodeId="61"/>
+            <TransformGroup name="ClawHydRightRefFrame" translation="-0.274489 -0.0855066 -0.105895" rotation="0 1.48346 0" nodeId="62"/>
+            <Shape name="ColAttacher" translation="-0.00509838 -0.13953 -0.243496" shapeId="19" visibility="false" nodeId="63" castsShadows="false" receiveShadows="false" materialIds="7"/>
+            <TransformGroup name="QuickAttacher" translation="3.07336e-08 -0.0820958 -0.272719" rotation="90 5.09048 -90" nodeId="64"/>
+          </Shape>
+          <TransformGroup name="LeftHydRefPoint" translation="0.264196 -0.129138 -0.0936663" rotation="88.7919 -1.24297e-06 -4.41" nodeId="65"/>
+          <TransformGroup name="RightHydRefPoint" translation="-0.265982 -0.128661 -0.0872663" rotation="88.8682 1.40324e-06 4.98" nodeId="66"/>
+          <TransformGroup name="RootHoseJoint" nodeId="67">
+            <TransformGroup name="RootHoseBone" rotation="90 -0 0" nodeId="68"/>
+          </TransformGroup>
+          <Shape name="rotorBodyDecals" translation="0.172881 -0.0928499 0.154859" shapeId="20" nodeId="69" castsShadows="false" receiveShadows="true" materialIds="9"/>
+          <Shape name="TiltHoses" translation="0.0239124 0.295562 0.00474548" shapeId="21" nodeId="70" castsShadows="true" receiveShadows="true" skinBindNodeIds="87 68 78 82" materialIds="8"/>
+        </Shape>
+        <TransformGroup name="TiltDummy" translation="-2.79397e-09 0 -2.468e-07" rotation="-1.36604e-05 -0 0" nodeId="71">
+          <TransformGroup name="RotorDummy" translation="-0.000176713 -0.160461 -0.0463819" rotation="-6.83019e-06 -0 0" nodeId="72">
+            <Shape name="RotorCol" translation="-0.0079181 -0.104457 0.0590365" rotation="-6.83019e-06 -0 0" shapeId="22" visibility="false" static="true" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" density="0.0001" nodeId="73" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+            <TransformGroup name="QuickAttacherDummy" translation="1.67772e-08 -0.0816347 -0.272719" rotation="90 5.0905 -90" nodeId="74"/>
+          </TransformGroup>
+          <Shape name="TiltCol" translation="-0.00809482 -0.0446093 0.0126546" rotation="-6.83019e-06 -0 0" shapeId="23" visibility="false" static="true" compoundChild="true" collisionFilterGroup="0x203002" collisionFilterMask="0x203002" density="0.0001" nodeId="75" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="6"/>
+        </TransformGroup>
+        <Shape name="HydLeft" translation="0.290781 0.206 -0.0962046" rotation="89.7507 1.84876e-09 -4.5093" shapeId="24" nodeId="76" castsShadows="true" receiveShadows="true" materialIds="8">
+          <TransformGroup name="HydLeftJoint" translation="0 -2.79397e-09 0" rotation="-89.7499 4.50926 0.0196597" nodeId="77">
+            <TransformGroup name="HydLeftBone" translation="0 0 1.4926e-09" rotation="179.751 1.58737e-07 -4.5093" nodeId="78"/>
+          </TransformGroup>
+          <Shape name="HydLeftPunch" translation="4.78923e-05 -0.00282383 -0.224" rotation="-0.958828 0.0994284 0.000432197" shapeId="25" nodeId="79" castsShadows="true" receiveShadows="true" materialIds="8"/>
+        </Shape>
+        <Shape name="HydRight" translation="-0.291398 0.206318 -0.0962046" rotation="88.6313 -1.2966e-09 4.58098" shapeId="26" nodeId="80" castsShadows="true" receiveShadows="true" materialIds="8">
+          <TransformGroup name="RightHydJoint" translation="0 -9.31323e-10 0" rotation="-88.6269 -4.57967 -0.109655" nodeId="81">
+            <TransformGroup name="HydRightBone" translation="0 0 -1.88337e-09" rotation="178.631 3.53798e-07 4.58098" nodeId="82"/>
+          </TransformGroup>
+          <Shape name="HydRightPunch" translation="0.000232607 0.00155544 -0.224093" rotation="0.236951 0.393974 0.00941357" shapeId="27" nodeId="83" castsShadows="true" receiveShadows="true" materialIds="8"/>
+        </Shape>
+        <Shape name="CouplerBodyDecals" translation="0 0.0901174 0.019" shapeId="28" nodeId="84" castsShadows="false" receiveShadows="true" materialIds="9"/>
+        <TransformGroup name="AttacherHoseJoint" translation="0 0 -7.91624e-08" rotation="-1.36604e-05 -0 0" nodeId="85">
+          <TransformGroup name="AttacherHoseBone" rotation="90 -0 0" nodeId="86"/>
+          <TransformGroup name="AttacherHoseBoneTest" translation="0 -0.452725 -0.000345696" rotation="90 -0 0" nodeId="87"/>
+        </TransformGroup>
+        <TransformGroup name="HoseConnectionA" translation="-0.238783 0.278205 -0.280714" rotation="-180 -5.00896e-06 180" nodeId="88"/>
+        <TransformGroup name="HoseConnectionB" translation="0.234085 0.276606 -0.280703" rotation="-180 -5.00896e-06 180" nodeId="89"/>
+        <TransformGroup name="AttacherJoint" translation="5.02914e-08 0.224314 -0.320048" rotation="90 0.152056 -90" nodeId="90"/>
+      </Shape>
+    </Shape>
+  </Scene>
+
+</i3D>

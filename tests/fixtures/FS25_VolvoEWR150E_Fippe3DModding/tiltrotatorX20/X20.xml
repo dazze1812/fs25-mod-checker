@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="baseAttachable">
+    <annotation>Copyright (C) GIANTS Software GmbH, All Rights Reserved.</annotation>
+
+    <storeData>
+        <name>Steelwrist X20</name>
+        <image>tiltrotatorX20/store_X20.png</image>
+		<functions>
+            <function>$l10n_function_rototilt</function>
+        </functions>
+        <price>17000</price>
+        <lifetime>600</lifetime>
+        <rotation>0</rotation>
+        <brand>LIZARD</brand>
+        <category>forestryExcavatorTools</category>
+		<shopTranslationOffset>0 0.016 0</shopTranslationOffset>
+        <shopRotationOffset>-0.051 0 0</shopRotationOffset>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_excavatorTool</typeDesc>
+        <filename>tiltrotatorX20/tiltrotatorX20.i3d</filename>
+        <size width="2" length="2" height="1.5"/>
+        <components>
+            <component centerOfMass="0 0.2 0" solverIterationCount="10" mass="500" />
+        </components>
+        <schemaOverlay attacherJointPosition="0 0" name="IMPLEMENT" />
+    </base>
+
+    <attachable>
+        <inputAttacherJoints>
+            <inputAttacherJoint node="AttacherJoint" jointType="wheelLoader" >
+            <subType name="S60" /> 
+			</inputAttacherJoint>
+        </inputAttacherJoints>
+    </attachable>
+	<attacherJoints>
+		<attacherJoint node="QuickAttacherDummy" jointType="wheelLoader" allowsJointLimitMovement="false" allowsLowering="false" rotLimitSpring="9999 9999 9999" rotLimitDamping="2 2 2" transLimitSpring="9999 9999 9999" transLimitDamping="2 2 2">
+            <schema position="1 0.5" rotation="0" invertX="true"/>
+			<subType name="S60" /> 
+        </attacherJoint>
+    </attacherJoints>
+	<connectionHoses>
+        <hose inputAttacherJointIndices="1" type="CABLE_BUNDLE"  node="HoseConnectionB" length="5" diameter="0.04" minCenterPointAngle="30" straighteningFactor="2.5" isTwoPointHose="true">
+        </hose>
+        <hose inputAttacherJointIndices="1" type="CABLE_BUNDLE" node="HoseConnectionA" length="5" diameter="0.04" minCenterPointAngle="30" straighteningFactor="2.5" isTwoPointHose="true">
+        </hose>
+    </connectionHoses>
+	<cylindered>
+        <movingTools>
+            <movingTool node="TiltDummy" delayedNode="Tilt" playSound="true" isConsumingPower="true">
+                <controls axis="AXIS_CRANE_TOOL" invertAxis="false" mouseSpeedFactor="0.5" iconName="CRANE_ARM1_ROTATE_X" />
+                <rotation rotSpeed="25" rotAcceleration="200" rotMax="40" rotMin="-40" rotationAxis="3"/>
+				<attacherJoint jointIndices="1" />
+            </movingTool>
+			<movingTool node="RotorDummy" delayedNode="Rotor" playSound="true" isConsumingPower="true">
+                <controls axis="AXIS_CRANE_TOOL2" invertAxis="false" mouseSpeedFactor="0.5" iconName="CRANE_ARM1_ROTATE_X" />
+                <rotation rotSpeed="60" rotAcceleration="200" rotationAxis="2"/>
+				<attacherJoint jointIndices="1" />
+            </movingTool>
+			<movingTool node="ClawLeft" playSound="true" isConsumingPower="true">
+                <controls axis="AXIS_FRONTLOADER_TOOL5" invertAxis="true" mouseSpeedFactor="0.5" />
+                <rotation rotSpeed="100" rotAcceleration="250" rotMax="95" rotMin="0" startRot="0" rotationAxis="2" />
+				<dependentMovingTool node="ClawRight" speedScale="1" />
+				<dependentPart node="ClawLeftHyd" />
+            </movingTool>
+			<movingTool node="ClawRight" playSound="true">
+                <rotation rotSpeed="-100" rotAcceleration="250" rotMax="0" rotMin="-95" startRot="0" rotationAxis="2" />
+				<dependentPart node="ClawRightHyd" />
+			</movingTool>
+
+        </movingTools>
+		<movingParts>
+			<movingPart node="HydLeft" referencePoint="LeftHydRefPoint" referenceFrame="LeftHydRefPoint" isActiveDirty="true" maxUpdateDistance="50">
+                <translatingPart node="HydLeftPunch"/>
+            </movingPart>
+			<movingPart node="HydRight" referencePoint="RightHydRefPoint" referenceFrame="RightHydRefPoint" isActiveDirty="true" maxUpdateDistance="50">
+                <translatingPart node="HydRightPunch"/>
+            </movingPart>
+			<movingPart node="ClawLeftHyd" referencePoint="ClawHydLeftRefPoint" referenceFrame="ClawHydLeftRefFrame" isActiveDirty="true" maxUpdateDistance="50">
+                <translatingPart node="ClawLeftHydPunch"/>
+            </movingPart>
+			<movingPart node="ClawRightHyd" referencePoint="ClawHydRightPoint" referenceFrame="ClawHydRightRefFrame" isActiveDirty="true" maxUpdateDistance="50">
+                <translatingPart node="ClawRightHydPunch"/>
+            </movingPart>
+		</movingParts>
+
+    </cylindered>
+    <ai>
+        <agentAttachment width="1.4" height="0.62" length="1.82" lengthOffset="-0.05"/>
+    </ai>
+	<foliageBending>
+        <bendingNode minX="-0.237" maxX="0.237" minZ="-0.3" maxZ="0.3" yOffset="0.271" node="SteelwristMainComp" />
+        <bendingNode minX="-0.339" maxX="0.339" minZ="-0.412" maxZ="0.35" yOffset="-0.33" node="Tilt" />
+    </foliageBending>
+    <wearable wearDuration="480" workMultiplier="5" fieldMultiplier="2"/>
+    <washable dirtDuration="90" washDuration="1" workMultiplier="2" fieldMultiplier="2"/>
+<i3dMappings>
+  <i3dMapping id="SteelwristMainComp" node="0>" />
+  <i3dMapping id="SteelWrist" node="0>0" />
+  <i3dMapping id="Tilt" node="0>0|0" />
+  <i3dMapping id="Rotor" node="0>0|0|0" />
+  <i3dMapping id="ClawLeft" node="0>0|0|0|0" />
+  <i3dMapping id="ClawHydLeftRefPoint" node="0>0|0|0|0|0" />
+  <i3dMapping id="ClawRight" node="0>0|0|0|1" />
+  <i3dMapping id="ClawHydRightPoint" node="0>0|0|0|1|0" />
+  <i3dMapping id="ClawLeftHyd" node="0>0|0|0|2" />
+  <i3dMapping id="ClawLeftHydPunch" node="0>0|0|0|2|0" />
+  <i3dMapping id="ClawRightHyd" node="0>0|0|0|3" />
+  <i3dMapping id="ClawRightHydPunch" node="0>0|0|0|3|0" />
+  <i3dMapping id="ClawHydLeftRefFrame" node="0>0|0|0|4" />
+  <i3dMapping id="ClawHydRightRefFrame" node="0>0|0|0|5" />
+  <i3dMapping id="ColAttacher" node="0>0|0|0|6" />
+  <i3dMapping id="QuickAttacher" node="0>0|0|0|7" />
+  <i3dMapping id="LeftHydRefPoint" node="0>0|0|1" />
+  <i3dMapping id="RightHydRefPoint" node="0>0|0|2" />
+  <i3dMapping id="RootHoseJoint" node="0>0|0|3" />
+  <i3dMapping id="RootHoseBone" node="0>0|0|3|0" />
+  <i3dMapping id="X20logo" node="0>0|0|4" />
+  <i3dMapping id="TiltHoses" node="0>0|0|5" />
+  <i3dMapping id="TiltDummy" node="0>0|1" />
+  <i3dMapping id="RotorDummy" node="0>0|1|0" />
+  <i3dMapping id="RotorCol" node="0>0|1|0|0" />
+  <i3dMapping id="QuickAttacherDummy" node="0>0|1|0|1" />
+  <i3dMapping id="TiltCol" node="0>0|1|1" />
+  <i3dMapping id="HydLeft" node="0>0|2" />
+  <i3dMapping id="HydLeftJoint" node="0>0|2|0" />
+  <i3dMapping id="HydLeftBone" node="0>0|2|0|0" />
+  <i3dMapping id="HydLeftPunch" node="0>0|2|1" />
+  <i3dMapping id="HydRight" node="0>0|3" />
+  <i3dMapping id="HydRightJoint" node="0>0|3|0" />
+  <i3dMapping id="HydRightBone" node="0>0|3|0|0" />
+  <i3dMapping id="HydRightPunch" node="0>0|3|1" />
+  <i3dMapping id="Logo" node="0>0|4" />
+  <i3dMapping id="AttacherHoseJoint" node="0>0|5" />
+  <i3dMapping id="AttacherHoseBone" node="0>0|5|0" />
+  <i3dMapping id="HoseConnectionA" node="0>0|6" />
+  <i3dMapping id="HoseConnectionB" node="0>0|7" />
+  <i3dMapping id="AttacherJoint" node="0>0|8" />
+</i3dMappings>
+</vehicle>

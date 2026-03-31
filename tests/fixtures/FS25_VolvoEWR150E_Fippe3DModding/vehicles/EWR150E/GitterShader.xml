@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) Lampovo Project(Made the shader work), Razor Modding Team(Skinning Error) (21.11.2024) -->
+<!-- Stripped down for Gitter by Gemini Code Assist -->
+<CustomShader version="5">
+    <Parameters>
+        <Parameter name="scratches_dirt_snow_wetness" target="scratches_dirt_snow_wetness" type="float4" group="base" defaultValue="0.0 0.0 0.0 0.0" minValue="0.0 0.0 0.0 0.0" maxValue="1.0 1.0 1.0 50.0"/>
+        <Parameter name="dirtColor" target="dirtColor" type="float4" group="base" defaultValue="0.20 0.14 0.08 0.0" minValue="0.0 0.0 0.0 0.0" maxValue="1.0 1.0 1.0 1.0"/>
+        <Parameter name="colorMat" target="colorMat" type="float4" group="colorMask" arraySize="8" defaultValue="0.5 0.5 0.5 1.0" minValue="0.0 0.0 0.0 0.0" maxValue="1.0 1.0 1.0 255.0">
+            <Default index="0">0.80 0.55 0.05 1.0</Default>
+            <Default index="1">1.00 0.10 0.10 1.0</Default>
+            <Default index="2">0.10 1.00 0.10 1.0</Default>
+            <Default index="3">0.10 0.10 1.00 1.0</Default>
+            <Default index="4">1.00 1.00 0.10 1.0</Default>
+            <Default index="5">0.05 0.05 0.05 1.0</Default>
+            <Default index="6">1.00 0.10 1.00 1.0</Default>
+            <Default index="7">0.10 1.00 1.00 1.0</Default>
+        </Parameter>
+    </Parameters>
+    <UvUsages>
+        <UvUsage textureName="baseMap" uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="normalMap" uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="glossMap" uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="mArraySpecular" uvType="custom"/>
+        <UvUsage textureName="mArrayNormal" uvType="custom"/>
+        <UvUsage textureName="mArrayDiffuse" uvType="custom"/>
+    </UvUsages>
+    <Textures>
+        <Texture name="mArraySpecular" group="base" type="2dArray" defaultColorProfile="linearRGB" defaultFilename="$data/fs22support/shared/detailArray_specular.png"/>
+        <Texture name="mArrayNormal" group="base" type="2dArray" defaultColorProfile="linearRGB" defaultFilename="$data/fs22support/shared/detailArray_normal.png"/>
+        <Texture name="mArrayDiffuse" group="base" type="2dArray" defaultColorProfile="sRGB" defaultFilename="$data/fs22support/shared/detailArray_diffuse.png"/>
+    </Textures>
+    <Variations>
+        <Variation name="colorMask" groups="base colorMask"><![CDATA[
+/*
+    Enables colorPainting.
+            if uv.y>0 use mArrayDiffuse
+            if uv.y<0 colorMat<index> is loaded with index=floor(uv.x)
+*/
+    #define COLOR_MASK
+]]></Variation>
+    </Variations>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="OBJECT_PARAMETERS"><![CDATA[
+/*
+    scratches_dirt_snow_wetness.x - Scratches Amount
+    scratches_dirt_snow_wetness.y - Dirt Amount
+    scratches_dirt_snow_wetness.z - Snow Amount
+    scratches_dirt_snow_wetness.w - Wetness Amount // do not supported by this shader
+*/
+    float4 scratches_dirt_snow_wetness;
+    float4 dirtColor;
+#if defined( COLOR_MASK )
+/*
+    colorMat<index>.rgb - diffuse color information
+    colorMat<index>.a   - material index
+*/
+    float4 colorMat[8];
+#endif
+]]></CodeInjection>
+            <CodeInjection position="SAMPLERS"><![CDATA[
+/*
+glossMap.r - scratches mask
+glossMap.g - global AO
+glossMap.b - dirt mask
+
+mArraySpecular.r - smoothness
+mArraySpecular.g - micro AO
+mArraySpecular.b - metalness
+*/
+texture2DArray<float3> mArraySpecular;
+texture2DArray<float3> mArrayNormal;
+texture2DArray<float3> mArrayDiffuse;
+]]></CodeInjection>
+            <CodeInjection position="FS_GLOBALS"><![CDATA[
+    float3 gDetailDiffuse;
+    float3 gDetailSpecular;
+    float3 gDetailNormal;
+    float  gScratchesMask;
+    float  gAO;
+    float  gDirtMask;
+    float  gSnowMask;
+    float3 gSnowDiffuse;
+    float3 gSnowSpecular;
+]]></CodeInjection>
+            <CodeInjection position="VS_OUTPUT"><![CDATA[
+    float2 texCoordsOrig : TEXCOORDn;
+    float2 texCoordsX    : TEXCOORDn;
+    float2 texCoordsY    : TEXCOORDn;
+    float2 texCoordsZ    : TEXCOORDn;
+    float3 localNormal   : TEXCOORDn;
+]]></CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS"><![CDATA[
+    float3 localPosition = In.position.xyz;
+    float mUVScale = 3.0;
+    Out.texCoordsOrig = getDefaultTexCoords(In, instance, object);
+    Out.texCoordsX = mUVScale * localPosition.yz;
+    Out.texCoordsY = mUVScale * localPosition.xz;
+    Out.texCoordsZ = mUVScale * localPosition.xy;
+    Out.localNormal = normalize(In.normal.xyz);
+]]></CodeInjection>
+            <CodeInjection position="LIB_FUNCTION_FS"><![CDATA[
+// simplifed smoothstep
+// remaps the values of x between a and b to the range [0, 1], and clamps values outside this range
+float linearstep(float a, float b, float x){
+    return saturate((x - a)/(b - a));
+}
+]]></CodeInjection>
+            <CodeInjection position="START_FS"><![CDATA[
+    float4 mGloss  = float4(0.0,1.0,0.0,0.0);
+    globals.gAO     = 1.0;
+    globals.gScratchesMask = 0.0;
+    globals.gDirtMask      = 0.0;
+    globals.gSnowMask      = 0.0;
+#if defined( GLOSS_MAP )
+    mGloss = tex2DSample( glossMap, GLOSS_MAP_SAMPLER, GLOSS_MAP_TEXCOORDS).rgba;
+    globals.gScratchesMask = mGloss.r;
+    globals.gAO = mGloss.g;
+    globals.gDirtMask = mGloss.b;
+    globals.gSnowMask = mGloss.b;
+#endif
+    float mScratches = min(object.scratches_dirt_snow_wetness.x,0.95); // limit scratches to 0.95
+    globals.gScratchesMask = linearstep(1-mScratches, 1-mScratches+0.05, globals.gScratchesMask);
+    float mDirt = linearstep(1-object.scratches_dirt_snow_wetness.y, 1-object.scratches_dirt_snow_wetness.y+0.5, globals.gDirtMask);
+    float mDust = globals.gDirtMask*object.scratches_dirt_snow_wetness.y;
+    globals.gDirtMask = saturate(mDust + mDirt);
+    // Detail textures
+    globals.gDetailSpecular    = float3(0.1,1.0,0.0);
+    globals.gDetailNormal      = float3(0.5,0.5,1.0);
+    float4 colorMat = float4(0.5,0.5,0.5,0.0);
+    uint  aIndex   = 0;
+#if defined(COLOR_MASK)
+    if (In.vs.texCoordsOrig.y < 0) {
+        float2 uv = In.vs.texCoordsOrig;
+        colorMat = object.colorMat[clamp(int(uv.x), 0, 7)];
+        aIndex = uint(colorMat.w);
+    } else
+#endif
+    {
+        aIndex = uint(max(0.0,floor(In.vs.texCoordsOrig.x) + floor(In.vs.texCoordsOrig.y)*8));
+    }
+    {
+        float3 mAbsNormal   = abs(In.vs.localNormal);
+        mAbsNormal /= (mAbsNormal.x + mAbsNormal.y + mAbsNormal.z);
+        float2 uvs = mAbsNormal.x > mAbsNormal.y ? (mAbsNormal.x > mAbsNormal.z ? In.vs.texCoordsX : In.vs.texCoordsZ) : (mAbsNormal.y > mAbsNormal.z ? In.vs.texCoordsY : In.vs.texCoordsZ);
+        float4 tempDetailSpecular = tex2DSample(mArraySpecular, standardMaterialSampler, uvs, aIndex);
+        globals.gDetailSpecular = float3(tempDetailSpecular.x, tempDetailSpecular.y, tempDetailSpecular.z);
+        
+        float4 tempDetailNormal = tex2DSample(mArrayNormal, standardMaterialSampler, uvs, aIndex);
+        globals.gDetailNormal = float3(tempDetailNormal.x, tempDetailNormal.y, tempDetailNormal.z);
+        
+        float4 tempDetailDiffuse = tex2DSample(mArrayDiffuse, standardMaterialSampler, uvs, aIndex);
+        globals.gDetailDiffuse = float3(tempDetailDiffuse.x, tempDetailDiffuse.y, tempDetailDiffuse.z);
+        // Scratches
+        float4 tempScratchesSpecular = tex2DSample(mArraySpecular, standardMaterialSampler, uvs, 8);
+        float3 mScratchesSpecular = float3(tempScratchesSpecular.x, tempScratchesSpecular.y, tempScratchesSpecular.z);
+        float3 mScratchesNormal = float3(0.5, 0.5, 1.0);
+        globals.gDetailSpecular = lerp(globals.gDetailSpecular, mScratchesSpecular, globals.gScratchesMask);
+        globals.gDetailNormal = lerp(globals.gDetailNormal, mScratchesNormal, globals.gScratchesMask);
+        
+        // Dirt
+        float4 tempDirtSpecular = tex2DSample(mArraySpecular, standardMaterialSampler, uvs, 15);
+        float3 mDirtSpecular = float3(tempDirtSpecular.x, tempDirtSpecular.y, tempDirtSpecular.z);
+        
+        float4 tempDirtNormal = tex2DSample(mArrayNormal, standardMaterialSampler, uvs, 15);
+        float3 mDirtNormal = float3(tempDirtNormal.x, tempDirtNormal.y, tempDirtNormal.z);
+        
+        globals.gDetailSpecular = lerp(globals.gDetailSpecular, mDirtSpecular, globals.gDirtMask);
+        globals.gDetailNormal = lerp(globals.gDetailNormal, mDirtNormal, globals.gDirtMask);
+    }
+    globals.gDetailNormal = 2.0*globals.gDetailNormal - 1.0;
+    {
+        // snow code
+        float snowControl     = object.scratches_dirt_snow_wetness.z;
+        globals.gSnowMask     = saturate(linearstep(1-snowControl, 1-snowControl+0.5, globals.gSnowMask ) + globals.gSnowMask*snowControl);
+        globals.gSnowMask     = globals.gSnowMask*globals.gSnowMask*globals.gSnowMask; // power of 3
+        globals.gSnowDiffuse  = float3(0.7300,0.7668,0.8356);
+        globals.gSnowSpecular = float3(0.1922,0.8706,0.0000);
+    }
+]]></CodeInjection>
+            <CodeInjection position="GET_UNNORMALIZED_TANGENT_SPACE_NORMAL_FS"><![CDATA[
+#if defined( NORMAL_MAP )
+    float3 mNormal;
+    #ifdef NORMAL_MAP_SIGNED_2CHANNEL
+        // use BC5 signed format for the normal map
+        mNormal.xy = tex2DSample(normalMap, NORMAL_MAP_SAMPLER, NORMAL_MAP_TEXCOORDS).xy;
+        mNormal.z = sqrt(1.0 - dot(mNormal.xy, mNormal.xy));
+    #else
+        mNormal = tex2DSample(normalMap, NORMAL_MAP_SAMPLER, NORMAL_MAP_TEXCOORDS).xyz - 0.5;
+    #endif
+    mNormal.xy += globals.gDetailNormal.xy;
+    return mNormal;
+#endif
+]]></CodeInjection>
+            <CodeInjection position="POST_DIFFUSE_COLOR_FS"><![CDATA[
+#if defined( SPECULAR ) && defined( GLOSS_MAP )
+    #if defined(COLOR_MASK)
+        if (In.vs.texCoordsOrig.y < 0) {
+            diffuseColor = colorMat.rgb;
+            diffuseColor *= globals.gDetailSpecular.g;
+        } else {
+            diffuseColor = globals.gDetailDiffuse;
+        }
+    #else
+        diffuseColor *= globals.gDetailSpecular.g;
+    #endif
+    {
+        float3 mScratchesDiffuse  = float3(0.98,0.98,0.98);
+        diffuseColor  = lerp(diffuseColor, mScratchesDiffuse, globals.gScratchesMask);
+        float3 mDirtDiffuse = object.dirtColor.rgb*globals.gDetailSpecular.g; // HardCoded Dirt Color
+        diffuseColor  = lerp(diffuseColor,mDirtDiffuse,globals.gDirtMask);
+    }
+#endif
+    { // Snow mixing code
+        diffuseColor.rgb = lerp( diffuseColor.rgb, globals.gSnowDiffuse.rgb, globals.gSnowMask );
+    }
+]]></CodeInjection>
+            <CodeInjection position="POST_GLOSS_COLOR_FS"><![CDATA[
+#if defined( SPECULAR ) && defined( GLOSS_MAP )
+    roughness = 1 - globals.gDetailSpecular.r;
+    metalness = globals.gDetailSpecular.b;
+    bakedAO   = globals.gAO;
+#endif
+    { // Snow mixing code
+        float3 mPbrMapValues = lerp( float3(1-roughness,bakedAO,metalness), globals.gSnowSpecular, globals.gSnowMask );
+        roughness = 1-mPbrMapValues.x;
+        bakedAO   = mPbrMapValues.y;
+        metalness = mPbrMapValues.z;
+    }
+]]></CodeInjection>
+            <CodeInjection position="CALC_SHOW_MIP_LEVELS_FS"><![CDATA[
+// Color mask textures have no albedo map, use the normal map or gloss map mapping instead
+#if defined( SPECULAR ) && defined( GLOSS_MAP )
+    #if defined(COLOR_MASK)
+        #if defined(NORMAL_MAP)
+            numMips = (float)tex2DGetNumMipLevels(normalMap);
+            texLod  = tex2DCalcLodUnclamped(normalMap, NORMAL_MAP_SAMPLER, NORMAL_MAP_TEXCOORDS*8);
+        #else
+            numMips = (float)tex2DGetNumMipLevels(glossMap);
+            texLod  = tex2DCalcLodUnclamped(glossMap, GLOSS_MAP_SAMPLER, GLOSS_MAP_TEXCOORDS*8);
+        #endif
+    #endif
+#endif
+]]></CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

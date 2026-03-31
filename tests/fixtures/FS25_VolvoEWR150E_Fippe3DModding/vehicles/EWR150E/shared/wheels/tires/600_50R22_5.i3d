@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="600_50R22_5.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11"/>
+  </Asset>
+
+  <Files>
+    <File fileId="13" filename="$data/shaders/tireMudShader.xml"/>
+    <File fileId="4" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="10" filename="$data/shared/detailLibrary/nonMetallic/dirt_diffuse.png"/>
+    <File fileId="8" filename="$data/shared/detailLibrary/nonMetallic/dirt_specular.png"/>
+    <File fileId="12" filename="$data/shared/detailLibrary/nonMetallic/mud_normal.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubberBlack_diffuse.png"/>
+    <File fileId="6" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_normal.png"/>
+    <File fileId="5" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_specular.png"/>
+    <File fileId="2" filename="$data/shared/wheels/tires/vredestein/endurionTrailer/endurionTrailer_normal.png"/>
+    <File fileId="3" filename="$data/shared/wheels/tires/vredestein/endurionTrailer/endurionTrailer_vmask.png"/>
+    <File fileId="1" filename="$data/shared/white_diffuse.png"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="_600_50_R22_5_TL163D_mat" materialId="6" customShaderId="4" customShaderVariation="tirePressureDeformation">
+      <Texture fileId="1"/>
+      <Normalmap fileId="2"/>
+      <Glossmap fileId="3"/>
+      <Custommap name="detailSpecular" fileId="5"/>
+      <Custommap name="detailNormal" fileId="6"/>
+      <Custommap name="detailDiffuse" fileId="7"/>
+      <CustomParameter name="porosity" value="0.5"/>
+      <CustomParameter name="morphPos" value="-0.335 -0.584 0.5 0.1"/>
+    </Material>
+    <Material name="mud_mat" materialId="5" customShaderId="13">
+      <Texture fileId="10"/>
+      <Normalmap fileId="12"/>
+      <Glossmap fileId="8"/>
+      <CustomParameter name="morphPos" value="-0.335 -0.584 0.5 0.1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="600_50R22_5.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="_600_50_R22_5_TL163D" nodeId="11">
+      <TransformGroup name="lod" lodDistance="0 25" static="true" collisionFilterMask="0xfffffbff" clipDistance="600" nodeId="12">
+        <Shape name="lod0" scale="0.93 0.93 0.93" shapeId="1" clipDistance="300" nodeId="13" castsShadows="true" receiveShadows="true" materialIds="6">
+          <Shape name="mudMesh" shapeId="2" clipDistance="35" nodeId="14" castsShadows="true" receiveShadows="true" materialIds="5"/>
+        </Shape>
+        <Shape name="lod1" scale="0.93 0.93 0.93" shapeId="3" clipDistance="300" nodeId="15" castsShadows="true" receiveShadows="true" materialIds="6"/>
+      </TransformGroup>
+    </TransformGroup>
+  </Scene>
+
+</i3D>
