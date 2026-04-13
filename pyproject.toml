@@ -13,7 +13,7 @@ dependencies = [
 fs25-mod-checker = "fs25_mod_checker:main"
 
 [build-system]
-requires = ["hatchling>=1.27.0"]
+requires = ["hatchling>=1.29.0"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
